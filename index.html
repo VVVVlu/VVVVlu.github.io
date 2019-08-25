@@ -348,7 +348,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-25 23:34:45" itemprop="dateModified" datetime="2019-08-25T23:34:45+08:00">2019-08-25</time>
+                <time title="Modified: 2019-08-25 23:47:36" itemprop="dateModified" datetime="2019-08-25T23:47:36+08:00">2019-08-25</time>
               
             
           </span>
@@ -386,8 +386,11 @@
           
             <center><h3>集成学习–简要梳理</h3></center>
 
-<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a><font color="#d85916">前言</font></h4><p>我们都知道，一个人的意见往往带有主观色彩，如果只听信一人之言，当这个人做出错误判断时，那会影响我们对整个事情的判断。为了对事物的认知更加全面正确，我们可以找多个可靠的人，让每个人都做判断，然后选择相信大多数人都认可的看法。这种用“多”代之“少”，减小偏差的思想便是集成学习。</p>
-<p>####<font color="#d85916">集成学习</font></p>
+<font color="#d85916">前言</font>
+
+<p>我们都知道，一个人的意见往往带有主观色彩，如果只听信一人之言，当这个人做出错误判断时，那会影响我们对整个事情的判断。为了对事物的认知更加全面正确，我们可以找多个可靠的人，让每个人都做判断，然后选择相信大多数人都认可的看法。这种用“多”代之“少”，减小偏差的思想便是集成学习。</p>
+<font color="#d85916">集成学习</font>
+
 <p>集成学习不是一种具体的机器学习算法，而是一种思想：将多个只在某些方面表现较好的弱分类器组合，通过一定的方式得到一个全方面表现较好的强分类器。</p>
 <p>两个问题：</p>
 <ul>
@@ -396,7 +399,7 @@
 </ul>
 <p>依上述问题，集成思想可以分为Boosting和Bagging。</p>
 <p><b>Boosting</b>是一种<font color="red">串行</font>集成，通过将弱学习器<font color="red">提升</font>成为强学习器以提高预测精度。利用弱学习器间的关系，在一轮学习结束后，对之前训练中错误标记的样本赋上较高的权重，改变训练数据的概率分布（改变<font color="red">权值</font>），然后再用算法学习得到一个分类器。针对不同训练数据集用算法学习出一系列分类器。典型算法是AdaBoost。</p>
-<p><img src="/Users/reed/blog/source/_posts/集成学习/img/Boosting示意图.png" alt="Boosting示意图"></p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/Boosting%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="Boosting示意图"></p>
 <ul>
 <li><p>每一轮如何改变训练数据的权值：AdaBoost中，提高前一轮被弱分类器分类错误的样本的权值，降低被正确分类的样本的权值。</p>
 </li>
@@ -405,9 +408,10 @@
 </ul>
 <p>总而言之，信任度是不均分配的，分类器的重要程度不同，对可信度更高的分类器赋予更重的决定权。</p>
 <p><b>Bagging</b>（bootstrap aggregating 套袋）是一种<font color="red">并行</font>集成，将训练集<font color="red">有放回随机</font>抽取n个训练样本，共进行k次抽取，k个训练集相互独立，训练得到k个分类器（k个模型根据算法可能用于回归或分类，这里只讨论分类）。对于每次预测，每个分类器有自己预测结果，采用“一人一票”，“多数投票制”，将所有分类器的分类结果中最多数的情况作为整个强分类器的分类结果输出。</p>
-<p><img src="/Users/reed/blog/source/_posts/集成学习/img/Bagging示意图.png" alt="Bagging示意图"></p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/Bagging%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="Bagging示意图"></p>
 <p>总而言之，分类器的重要程度相同，听大多数的意见。</p>
-<p>####<font color="#d85916">Bagging：装袋决策树</font></p>
+<font color="#d85916">Bagging：装袋决策树</font>
+
 <p>装袋决策树 即 Bagging+决策树（Decision Tree）算法。用决策树算法会生成一棵决策树作为分类器，Bagging按照上述描述，从原数据集中得到多个训练数据集，并用其训练得到多棵决策树，然后投票票决。</p>
 <p>算法思想清晰，不如来考虑一下决策树的问题：决策树算法如何生成一棵决策树？</p>
 <blockquote>
@@ -421,407 +425,23 @@
 </ul>
 <p>决策树学习是监督学习，对训练数据集中的样本数据会用一些系列特征来描述，并附上分类标签（决策树也可用于回归问题，这里只讨论分类）</p>
 <p>分类可以有二值的⬇️</p>
-<p><img src="/Users/reed/blog/source/_posts/集成学习/img/决策树分类图1.png" alt="决策树分类图1"></p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E5%9B%BE1.png" alt="决策树分类图1"></p>
 <p>也有多类的⬇️</p>
-<p><img src="/Users/reed/blog/source/_posts/集成学习/img/决策树分类图2.png" alt="决策树分类图2"></p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E5%9B%BE2.png" alt="决策树分类图2"></p>
 <p><b>特征选择—</b>对每个非叶结点，如何确定选择哪个特征作为分类依据？当然是需要一定的标准来衡量了。ID3算法、C4.5算法和CART算法三种常用决策树生成算法采用不同的东西（对应的是信息增益、信息增益比、基尼指数）作为衡量。</p>
 <p>详见<a href="https://blog.csdn.net/you1314520me/article/details/45372201" target="_blank" rel="noopener">https://blog.csdn.net/you1314520me/article/details/45372201</a></p>
 </blockquote>
-<p>####<font color="#d85916">Bagging：随机森林</font></p>
+<font color="#d85916">Bagging：随机森林</font>
+
 <p>对于袋装决策树，每次选特征都是对所有特征进行考虑，可能会出现一个问题，每棵树构建时，很强的预测变量都可能会最先用于分裂结点，那么如此下去，多棵树会长得相似，具有相同偏好预测，这样的情况下投票，带来的预测结构并不比单棵树效果好，</p>
 <p>随机森林是装袋决策树一种改进。它也是自主抽样训练集建立一系列决策树，改进在于建树时，对每一个分裂节点的特征选择是从所有特征m个中随机选p个，然后分裂所用的特征只能从这p个中选。在每个分裂点处都重新进行抽样，选出p个预测变量，通常p≈√m。（当p=m，即为袋装决策树）树的可信度变高。</p>
-<p>####<font color="#d85916">其它</font></p>
+<font color="#d85916">其它</font>
+
 <blockquote>
 <p>图片出处文章及参考博文：</p>
 <p>策树学习的特征选择 <a href="https://blog.csdn.net/you1314520me/article/details/45372201" target="_blank" rel="noopener">https://blog.csdn.net/you1314520me/article/details/45372201</a></p>
 <p>集成算法浅析：<a href="https://www.infoq.cn/article/ensemble-method/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global" target="_blank" rel="noopener">https://www.infoq.cn/article/ensemble-method/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global</a><br>机器学习-集成学习 <a href="https://www.cnblogs.com/zongfa/p/9304353.html" target="_blank" rel="noopener">https://www.cnblogs.com/zongfa/p/9304353.html</a><br>集成学习 <a href="https://www.jianshu.com/p/66ad2ee1558b" target="_blank" rel="noopener">https://www.jianshu.com/p/66ad2ee1558b</a><br>决策树（ID3 &amp; C4.5 &amp;CART） <a href="https://www.jianshu.com/p/38aa0daf6841" target="_blank" rel="noopener">https://www.jianshu.com/p/38aa0daf6841</a><br>决策树系列（一）—基础知识回顾与总结  <a href="https://www.cnblogs.com/yonghao/p/5061873.html" target="_blank" rel="noopener">https://www.cnblogs.com/yonghao/p/5061873.html</a></p>
 </blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="VVWw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VVWw Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-11 19:39:30" itemprop="dateCreated datePublished" datetime="2019-04-11T19:39:30+08:00">2019-04-11</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/MD4碰撞攻击/MD4Collison/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="VVWw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VVWw Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/11/MD4碰撞攻击/MD4Collison/" class="post-title-link" itemprop="url">MD4Collison</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-11 11:41:20" itemprop="dateCreated datePublished" datetime="2019-04-11T11:41:20+08:00">2019-04-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-21 10:15:23" itemprop="dateModified" datetime="2019-06-21T10:15:23+08:00">2019-06-21</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <center><h3>MD4碰撞攻击</h3></center>
-
-
-
-<blockquote>
-<p>​       目  的：<em>以论文梳理为主，回顾总结课程学习。</em></p>
-<p>参考论文：<em>2005年王小云教授等人发表的</em> <a href="https://link.springer.com/content/pdf/10.1007%2F11426639_1.pdf" target="_blank" rel="noopener"><em>Cryptanlysis of the Hash Functions MD4 and RIPEMD</em></a>   </p>
-</blockquote>
-<h4 id="MD4算法"><a href="#MD4算法" class="headerlink" title="MD4算法"></a><font color="#d85916">MD4算法</font></h4><p>​         MD4是较早出现的hash函数，在MD4后出现 了MD5,HAVAL,RIPEMD，RIPEMD-160，SHA-1,SHA-256等更加复杂的hash函数，但设计原理和结构与MD4类似（碰撞原理也类似）。</p>
-<p>​         消息摘要函数MD4将<font color="red">任意长度的消息</font>压缩至<font color="red">128bit</font>。算法对一个消息做如下操作：</p>
-<blockquote>
-<p><strong>step 1（填充）</strong>:将消息m填充至512的倍数（如果本身是512bit的消息，仍要填充，因为必须有64bit放消息长度）</p>
-<blockquote>
-<p>填充部分：|m  |   100…   |  len </p>
-<p>对应长度：|  448bit          | 64bit</p>
-</blockquote>
-<p><strong>step2（压缩）</strong>:填充完后，对每一个512bit消息块使用压缩函数将其压缩成128bit，最后一个消息块压缩完后得到的压缩值为整个消息的压缩值。</p>
-<p>压缩函数有3轮：</p>
-<blockquote>
-<p><img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/压缩函数.png" alt="压缩函数"></p>
-<font color="red">Notes:</font>
-
-<p>① mk：一个512bit块<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/m.png" alt="m"></p>
-<p>mi为32bit，共16个，每一步操作中用到不同的mi（即mk），据表5得到具体值。</p>
-<hr>
-<p>② a,b,c,d：链变量（具体操作见下）</p>
-<hr>
-<p>③ F,G,H：3个非线性bool函数</p>
-<p><img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/F，G，H.png" alt="F，G，H"></p>
-<p>  X，Y，Z为32bit消息字,三个函数是按位操作，进行与、或、非和异或运算</p>
-<hr>
-<p>④ s:循环左移位数，据表5可得到具体值。</p>
-<hr>
-<p>⑤ 两个16进制数：无具体含义，指定好的。</p>
-</blockquote>
-<p>压缩过程：</p>
-<blockquote>
-<p>设填充后消息<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/填充后m.png" alt="填充后m"></p>
-<p>M为<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/填充后m.png" alt="填充后m">中一个512bit块，且<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/m.png" alt="m">，mi每个32bit，共16个。</p>
-<p>① 输入链变量：设（aa,bb,cc,dd）为输入链变量，若M是<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/填充后m.png" alt="填充后m">的第一个512bit块，则输入链变量等于给定的初始值<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/链变量初始值.png" alt="链变量初始值">，其后的消息块的输入链变量（aa,bb,cc,dd）为上一块的压缩值。</p>
-<p>② 使用压缩函数：对每一个512bit消息块M，3轮压缩函数每轮进行16步，共48步，每一步中有一个链变量被更新,<font color="red">注意顺序是a、d、c、b</font>：（注：wi即为上述的mk）</p>
-<p><img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/48步.png" alt="48步"></p>
-<p>w与s由表5得具体值，设输入链变量a0,d0,c0,b0，48步产生的链变量为a1,d1,c1,b1,a2,d2,…,a12,d12,c12,b12,实际上a1-b12的链变量更新，使用到的是其往前数的4个值，如d1的产生用到了d0,a1,b0,c0</p>
-<p>③ 反馈过程： 48步操作完后，加入当前块的输入链变量，得到的结果才是<font color="red">当前块</font>的最终链变量<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/加入初始链变量.png" alt="加入初始链变量"></p>
-<p>如果已经是最后一个512bit的压缩了，则<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/hash值.png" alt="hash值"></p>
-<p>作为整个消息<img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/填充后m.png" alt="填充后m">的压缩值，否则（aa,bb,cc,dd）作为下一个512bit消息块的输入链变量。</p>
-</blockquote>
-</blockquote>
-<p>####<font color="#d85916">攻击思路</font></p>
-<p>​        碰撞是指不同的消息得到相同hash值，那么实际上，如果能够找到两个512bit消息m和m’产生碰撞，便可以构造m|s和m‘|s（s为任意串），两者一定产生碰撞。所以研究时只简化考虑512bit的消息。</p>
-<p>​        完整的想法应该是先确定好两个消息的差分，然后找一条最后能产生碰撞的差分路线。再找一组满足该差分路线的充分条件，根据这组条件修改消息以满足路线。在已经有了本论文的差分路线的前提下，找512bit消息的碰撞:首先找到两个满足消息差分的512bit消息。论文中的表6是使得表5差分路线成立的一组充分条件，接着我们按照表6修改链变量，再根据链变量修改消息  。</p>
-<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a><font color="#d85916">准备工作</font></h4><p>  <strong>1.有用的bool函数性质</strong>（x,y,z是对位的操作）</p>
-<blockquote>
-<p><img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E5%87%BD%E6%95%B0%E6%80%A7%E8%B4%A81%20.png" alt="函数性质1 "></p>
-<p><img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E5%87%BD%E6%95%B0%E6%80%A7%E8%B4%A82.png" alt="函数性质2"></p>
-<p><img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E5%87%BD%E6%95%B0%E6%80%A7%E8%B4%A83.png" alt="函数性质3">        如F中第一条：当y与z在第i位相同时，x的第i位改变并不影响F得到的结果。利用这些性质可以合适的构造差分路线。</p>
-</blockquote>
-<p>  <strong>2.论文中使用的符号</strong></p>
-<blockquote>
-<p>为了方便描述构造的差分路线，先定义一些符号。</p>
-<p>1.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/m.png" alt="m">和<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E7%AC%A6%E5%8F%B71.png" alt="符号1">代表两个512bit消息。</p>
-<p>2.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E7%AC%A6%E5%8F%B72.png" alt="符号2">消息M压缩过程中产生的链变量，从a0,d0,c0,d0..a12,d12,b12,c12</p>
-<p>3.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E7%AC%A6%E5%8F%B73.png" alt="符号3">消息M’压缩过程中产生的链变量，从a’0…c’12。</p>
-<p>4.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E7%AC%A6%E5%8F%B74.png" alt="符号4">很直观，代表小消息块（32bit）的差分。</p>
-<p>5.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E7%AC%A6%E5%8F%B75.png" alt="符号5">表示ai，bi，ci，di的第j个bit（1&lt;=j&lt;=32）。</p>
-<p>6.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E7%AC%A6%E5%8F%B76.png" alt="符号6">(x为a,b,c,d中任一个)，前者表示将x的第j位由0改为1，其他位保持不变后得到的对应结果值，后者是x第j位由1改为0，其他位保持不变得到的结果值。</p>
-<p>7.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/%E7%AC%A6%E5%8F%B77.png" alt="符号7">按照上述规则，对x（a/b/c/d）修改j1,j2..jl位，并让其他位保持不变得到的结果值。</p>
-<p>例子🌰：在使用中，如对两个消息中c2的差分<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/C2%E5%B7%AE%E5%88%86.png" alt="C2差分">，用符号可以表示为<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/C2%E5%B7%AE%E5%88%861.png" alt="C2差分1">，因为该差分实际上可由c2修改第19位（1-&gt;0），第22位（0-&gt;1）产生的c’2，两者相减得到。为什么是19和22位呢？因为第一位是<kbd>2^0</kbd>。再进一步，由于bit只有0和1，差分是可以被扩散的，也就是说两个链变量的差分<kbd>-2^18</kbd>=<kbd>-2^19+2^18</kbd>=<kbd>-2^20+2^19+2^18</kbd>=…可以一直扩散下去，当然具体扩散到哪里，这就是论文给出的“精确的”差分路线了。如最后是修改c2的19，20，21，22，位得到c’2.<img src="/Users/reed/blog/source/_posts/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/img/C2%E5%B7%AE%E5%88%862.png" alt="C2差分2"></p>
-</blockquote>
-<h4 id="碰撞攻击"><a href="#碰撞攻击" class="headerlink" title="碰撞攻击"></a><font color="#d85916">碰撞攻击</font></h4><p>​         使用论文中的方法，找到碰撞的概率可达<kbd>2^-2</kbd>~<kbd>2^-6</kbd>,且MD4运算复杂度低于<kbd>2^8</kbd>，自然，论文中的差分路线给了很多限制，是“精确”到bit的差分攻击。</p>
-<h5 id="消息差分构造"><a href="#消息差分构造" class="headerlink" title="消息差分构造"></a>消息差分构造</h5><blockquote>
-<p>两个512bit的消息M和M’ ，只有第1，2，12块不同，其他相同。</p>
-<p><img src="/Users/reed/blog/source/_posts/MD4碰撞攻击/img/消息差分.png" alt="消息差分"></p>
-</blockquote>
-<h5 id="消息修改"><a href="#消息修改" class="headerlink" title="消息修改"></a>消息修改</h5><h6 id="单步消息修改"><a href="#单步消息修改" class="headerlink" title="单步消息修改"></a>单步消息修改</h6><p>######多步消息修改</p>
-<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a><font color="#d85916">其它</font></h4><ul>
-<li><font color="gray">对表5的解读</font>
-
-</li>
-</ul>
-<blockquote>
-</blockquote>
-<ul>
-<li><font color="gray">第一次搭建blog，记录一下参考教程</font><a href="https://www.jianshu.com/p/77db3862595c" target="_blank" rel="noopener">https://www.jianshu.com/p/77db3862595c</a></li>
-</ul>
 
           
         
@@ -905,7 +525,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
