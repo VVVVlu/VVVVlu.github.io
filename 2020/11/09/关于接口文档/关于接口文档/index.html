@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="关于接口文档什么是接口接口有硬件类接口、软件类接口（API） API（Application Programming Interface）：应用程序接口。是一组预先定义的函数。提供给应用程序和开发人员访问外部系统服务的能力，而不用理解内部工作机制的细节。 什么是接口文档项目开发中，前后端分离开发，由前后端工程师共同定义接口文档，之后大家根据该接口文档开发提高效率，项目结束前需一直维护。 为什么要写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于接口文档">
+<meta property="og:url" content="http://yoursite.com/2020/11/09/关于接口文档/关于接口文档/index.html">
+<meta property="og:site_name" content="VVWw Blog">
+<meta property="og:description" content="关于接口文档什么是接口接口有硬件类接口、软件类接口（API） API（Application Programming Interface）：应用程序接口。是一组预先定义的函数。提供给应用程序和开发人员访问外部系统服务的能力，而不用理解内部工作机制的细节。 什么是接口文档项目开发中，前后端分离开发，由前后端工程师共同定义接口文档，之后大家根据该接口文档开发提高效率，项目结束前需一直维护。 为什么要写">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-11-09T07:29:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于接口文档">
+<meta name="twitter:description" content="关于接口文档什么是接口接口有硬件类接口、软件类接口（API） API（Application Programming Interface）：应用程序接口。是一组预先定义的函数。提供给应用程序和开发人员访问外部系统服务的能力，而不用理解内部工作机制的细节。 什么是接口文档项目开发中，前后端分离开发，由前后端工程师共同定义接口文档，之后大家根据该接口文档开发提高效率，项目结束前需一直维护。 为什么要写">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/11/09/关于接口文档/关于接口文档/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>关于接口文档 | VVWw Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">VVWw Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/09/关于接口文档/关于接口文档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VVWw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VVWw Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于接口文档
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-11-09 15:22:31 / Modified: 15:29:41" itemprop="dateCreated datePublished" datetime="2020-11-09T15:22:31+08:00">2020-11-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="关于接口文档"><a href="#关于接口文档" class="headerlink" title="关于接口文档"></a>关于接口文档</h1><h3 id="什么是接口"><a href="#什么是接口" class="headerlink" title="什么是接口"></a><font color="#d85916">什么是接口</font></h3><p>接口有硬件类接口、软件类接口（API）</p>
+<p>API（Application Programming Interface）：应用程序接口。是一组预先定义的函数。提供给应用程序和开发人员访问外部系统服务的能力，而不用理解内部工作机制的细节。</p>
+<h3 id="什么是接口文档"><a href="#什么是接口文档" class="headerlink" title="什么是接口文档"></a><font color="#d85916">什么是接口文档</font></h3><p>项目开发中，前后端分离开发，由前后端工程师共同定义接口文档，之后大家根据该接口文档开发提高效率，项目结束前需一直维护。</p>
+<h3 id="为什么要写接口文档"><a href="#为什么要写接口文档" class="headerlink" title="为什么要写接口文档"></a><font color="#d85916">为什么要写接口文档</font></h3><p>1.开发中，方便前后端工程师有统一的文件进行交流沟通</p>
+<p>2.维护或迭代时，方便后期人员查看、维护</p>
+<h3 id="接口规范"><a href="#接口规范" class="headerlink" title="接口规范"></a><font color="#d85916">接口规范</font></h3><p><strong>接口分为四个部分：方法、URI（不是URL）、请求参数、返回参数</strong></p>
+<ul>
+<li><p><strong>方法</strong>：GET、POST、PUT、DELETE，对服务端资源进行操作</p>
+<ul>
+<li>GET：获取资源</li>
+<li>POST：新建/更新资源</li>
+<li>PUT：更新资源</li>
+<li>DELETE：删除资源</li>
+</ul>
+</li>
+<li><p><strong>URI</strong>（Uniform Resource Identifie，同一资源标识符 ）：是用于标识web上可用资源名称的字符串。 该种标识允许用户对任何（包括本地和<a href="https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91/199186" target="_blank" rel="noopener">互联网</a>）的资源通过特定的协议进行交互操作。</p>
+<p>在服务器端，应用程序状态和功能可以分为各种资源，如应用程序对象、数据库记录、算法等等。每种资源使用URI得到唯一标识。每个URI代表一种资源。所有资源共享同一接口。</p>
+<p>以/a开头，如果需要登录才能调用的接口(如新增、修改；前台的用户个人信息，资金信息等)后面需要加/u，即：/a/u；中间一般放表名或者能表达这个接口的单词；get方法，如果是后台通过搜索查询列表，那么以/search结尾，如果是前台的查询列表，以/list结尾。e.g. get /a/student/list</p>
+</li>
+<li><p><strong>请求参数和返回参数</strong>，均为5列：字段、说明、类型、备注、是否必填</p>
+<ul>
+<li>字段：类的属性</li>
+<li>说明：中文释义，解释</li>
+<li>类型：属性类型 （仅为String、Number、Object、Array）</li>
+<li>备注：解释或例子</li>
+<li>是否必填：该“字段”是否必填</li>
+</ul>
+</li>
+</ul>
+<p>返回参数结构有几种情况：1、如果只返回接口调用成功还是失败（如新增、删除、修改等），则只有一个结构体：code和message两个参数；2、如果要返回某些参数，则有两个结构体：1是code/mesage/data，2是data里写返回的参数,data是object类型；3、如果要返回列表，那么有三个结构体，1是code/mesage/data,data是object，里面放置page/size/total/totalPage/list 5个参数，其中list是Arrary类型，list里放object，object里是具体的参数。</p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a><strong><font color="#d85916">参考</font></strong>：</h4><ul>
+<li><a href="https://www.zhihu.com/question/52409287" target="_blank" rel="noopener">https://www.zhihu.com/question/52409287</a></li>
+<li><a href="https://blog.csdn.net/qq_41287705/article/details/80211636?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task" target="_blank" rel="noopener">https://blog.csdn.net/qq_41287705/article/details/80211636?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task</a></li>
+<li><a href="https://blog.csdn.net/qq_41961113/article/details/80347341" target="_blank" rel="noopener">https://blog.csdn.net/qq_41961113/article/details/80347341</a></li>
+<li>百度百科</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/05/论文阅读——Dos-and-Don-ts-of-Machine-Learning-In-Computer-Security/论文阅读——Dos-and-Don-ts-of-Machine-Learning-In-Computer-Security/" rel="next" title="论文阅读——Dos and Don'ts of Machine Learning In Computer Security">
+                <i class="fa fa-chevron-left"></i> 论文阅读——Dos and Don'ts of Machine Learning In Computer Security
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">VVWw</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于接口文档"><span class="nav-number">1.</span> <span class="nav-text">关于接口文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是接口"><span class="nav-number">1.0.1.</span> <span class="nav-text">什么是接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是接口文档"><span class="nav-number">1.0.2.</span> <span class="nav-text">什么是接口文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要写接口文档"><span class="nav-number">1.0.3.</span> <span class="nav-text">为什么要写接口文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口规范"><span class="nav-number">1.0.4.</span> <span class="nav-text">接口规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考："><span class="nav-number">1.0.4.1.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VVWw</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
