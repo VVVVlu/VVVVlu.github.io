@@ -1,7 +1,258 @@
-extends includes/layout.pug
+<!DOCTYPE html><html data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VVWw Blog</title><meta name="author" content="VVWw"><meta name="copyright" content="VVWw"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="VVWw Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="VVWw Blog">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="VVWw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'VVWw Blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-12-15 19:34:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  include ./includes/mixins/post-ui.pug
-  #recent-posts.recent-posts
-    +postUI
-    include includes/pagination.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a></div></div></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">VVWw Blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">VVWw Blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/09/14/git%E5%90%8C%E6%97%B6%E5%90%8C%E6%AD%A5%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" title="git同时同步多个远程仓库">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git同时同步多个远程仓库"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/09/14/git%E5%90%8C%E6%97%B6%E5%90%8C%E6%AD%A5%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" title="git同时同步多个远程仓库">git同时同步多个远程仓库</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-09-14T09:40:55.000Z" title="Created 2021-09-14 17:40:55">2021-09-14</time></span></div><div class="content">git同时同步多个远程仓库
+
+
+需求拷贝github上的仓库到gtiblit，同时每次github仓库更新时，gitblit上同步更新。
+
+
+实现
+
+
+step1：在gitblit上创建一个新的仓库。(假设命名gitblit-test.git)
+
+step2 : 对github的本地仓库的路径下，执行以下命令，在origin节点下补充gitblit上这个新的远程地址。
+1git remote set-url --add origin gitblit-test.git地址
+执行前远程地址情况：
+123git remote --verboseorigin  github-test.git (fetch)origin  github-test.git (push)
+执行后：
+1234git remote --verboseorigin  github-test.git (fetch)origin  github-test.git (push)origin  gitblit-test.git (push) #新添的gitblit仓库地址
+
+
+
+
+
+step 3：运行git push，提交会同时 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/11/18/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94%E2%80%94%E2%80%94CADE-Detecting-and-Explaining-Concept-Drift-Samples-for-Security-Applications/" title="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/18/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94%E2%80%94%E2%80%94CADE-Detecting-and-Explaining-Concept-Drift-Samples-for-Security-Applications/" title="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications">论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-11-18T00:09:40.000Z" title="Created 2020-11-18 08:09:40">2020-11-18</time></span></div><div class="content">论文阅读——CADE: Detecting and Explaining Concept Drift Samples for Security Applications
+
+论文链接：https://www.usenix.org/conference/usenixsecurity21/presentation/yang
+Motivation
+
+在安全领域，当想要将基于机器学习的检测器（恶意软件检测、入侵检测等）部署到现实中使用时，效果可能不如测试阶段好。因为随着时间变化，benign和malicious行为都会发生一定变化，致使检测器出错。这个问题称为概念漂移（concept drift），本文中作者主要针对这个问题，提出一种能检测drifting sample并为drifting sample提供解释性的方法——CADE(Contrastive Autoencoder for Drifting detection and Explanation)。
+Details
+
+Challenge——concept drift
+
+concept drift是发生在将检测模型部署到现实中使用后。因为 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Assessing-and-Improving-Malware-Detection-Sustainability-through-App-Evolution-Studies/" title="论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies ">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies "></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Assessing-and-Improving-Malware-Detection-Sustainability-through-App-Evolution-Studies/" title="论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies ">论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies </a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-11-10T08:04:47.000Z" title="Created 2020-11-10 16:04:47">2020-11-10</time></span></div><div class="content">论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies
+
+论文链接：https://dl.acm.org/doi/pdf/10.1145/3371924
+Motivation
+
+在Android恶意软件检测方面，目前有相当多研究工作都在通过机器学习训练分类器等方法实现。然而Android平台和app演化速度很快，一个训练好的分类器能否有效检测新演化的恶意样本成了值得思考的问题。一种直观做法是更新数据集然后重训练，但显然开销很大而且没有根本性解决问题。作者认为一个实用性高的恶意软件检测器不仅应具备准确率，还应该对演化的恶意样本同样具有检测能力。
+Contribution
+
+
+研究了基于机器学习的恶意软件检测器的可持续检测能力（sustainability），并定义两个评估指标：可重用性（reusability）和稳定性（stability）来评估模型的可持续检测能力。                                                ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/11/09/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/" title="关于接口文档">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于接口文档"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/09/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/" title="关于接口文档">关于接口文档</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-11-09T07:22:31.000Z" title="Created 2020-11-09 15:22:31">2020-11-09</time></span></div><div class="content">关于接口文档什么是接口接口有硬件类接口、软件类接口（API）
+API（Application Programming Interface）：应用程序接口。是一组预先定义的函数。提供给应用程序和开发人员访问外部系统服务的能力，而不用理解内部工作机制的细节。
+什么是接口文档项目开发中，前后端分离开发，由前后端工程师共同定义接口文档，之后大家根据该接口文档开发提高效率，项目结束前需一直维护。
+为什么要写接口文档1.开发中，方便前后端工程师有统一的文件进行交流沟通
+2.维护或迭代时，方便后期人员查看、维护
+接口规范接口分为四个部分：方法、URI（不是URL）、请求参数、返回参数
+
+方法：GET、POST、PUT、DELETE，对服务端资源进行操作
+
+GET：获取资源
+POST：新建/更新资源
+PUT：更新资源
+DELETE：删除资源
+
+
+URI（Uniform Resource Identifie，同一资源标识符 ）：是用于标识web上可用资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。
+在服务器端，应用程序状态和功能可以分为各种资源，如应用程序 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/11/05/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Dos-and-Don-ts-of-Machine-Learning-In-Computer-Security/" title="论文阅读——Dos and Don'ts of Machine Learning In Computer Security">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文阅读——Dos and Don'ts of Machine Learning In Computer Security"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/05/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Dos-and-Don-ts-of-Machine-Learning-In-Computer-Security/" title="论文阅读——Dos and Don'ts of Machine Learning In Computer Security">论文阅读——Dos and Don'ts of Machine Learning In Computer Security</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-11-05T11:26:44.000Z" title="Created 2020-11-05 19:26:44">2020-11-05</time></span></div><div class="content">论文阅读——Dos and Don’ts of Machine Learning In Computer Security
+
+论文链接：https://arxiv.org/pdf/2010.09470.pdf
+##Motivation
+针对现在出现的一系列利用机器学习解决安全问题的研究工作，作者指出在实验设计和方法设置的环节中10个存在的缺陷（pitfall），使得实验结果其实存在偏差（通常比真实情况更好）或实验结论不正确。文章意在提醒研究人员对pitfalls的关注并给出建议。
+##Pitfall Details
+10个pitfalls按照ML的workflow依次给出。其实感觉这些pitfalls具有一定的通用性，只是这篇论文仅针对安全领域讨论。
+​
+####Data collection and labeling
+#####P1：Sampling Bias
+“The collected data does not sufficiently represent the true data distribution of the underlying security problem ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/12/26/Vue%E4%B8%AD%E4%BD%BF%E7%94%A8echarts%E7%94%9F%E6%88%90%E8%AF%8D%E4%BA%91/Vue%E4%B8%AD%E4%BD%BF%E7%94%A8echarts%E7%94%9F%E6%88%90%E8%AF%8D%E4%BA%91/" title="Vue中使用echarts生成词云">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue中使用echarts生成词云"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/26/Vue%E4%B8%AD%E4%BD%BF%E7%94%A8echarts%E7%94%9F%E6%88%90%E8%AF%8D%E4%BA%91/Vue%E4%B8%AD%E4%BD%BF%E7%94%A8echarts%E7%94%9F%E6%88%90%E8%AF%8D%E4%BA%91/" title="Vue中使用echarts生成词云">Vue中使用echarts生成词云</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2019-12-26T07:41:35.000Z" title="Created 2019-12-26 15:41:35">2019-12-26</time></span></div><div class="content">   vue中使用echarts生成词云    
+
+1.安装
+12npm install echarts —savenpm install echarts-wordcloud —save
+2.在main.js中全局引用
+12345import echarts from &#x27;echarts&#x27;Vue.prototype.$echarts=echartsrequire(&#x27;echarts-wordcloud&#x27;);//一定要有这句，不然出不来
+3.创建一个组件WordCloud，在组件中先设置div，表明id，宽高
+1234&lt;template&gt;    &lt;div id =&quot;wordcloud&quot; style=&quot;width:100%; height:840px;&quot;&gt;&lt;/div&gt;   &lt;/template&gt;
+然后在mounted挂载，实例化echarts对象
+1234567891011121314151617181920212223242526272829303132333435 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2019/08/24/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" title="集成学习">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="集成学习"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/08/24/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" title="集成学习">集成学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2019-08-24T11:11:54.000Z" title="Created 2019-08-24 19:11:54">2019-08-24</time></span></div><div class="content">集成学习–简要梳理
+
+前言
+
+我们都知道，一个人的意见往往带有主观色彩，如果只听信一人之言，当这个人做出错误判断时，那会影响我们对整个事情的判断。为了对事物的认知更加全面正确，我们可以找多个可靠的人，让每个人都做判断，然后选择相信大多数人都认可的看法。这种用“多”代之“少”，减小偏差的思想便是集成学习。
+集成学习
+
+集成学习不是一种具体的机器学习算法，而是一种思想：将多个只在某些方面表现较好的弱分类器组合，通过一定的方式得到一个全方面表现较好的强分类器。
+两个问题：
+
+怎样得到多个弱分类器？
+怎样组合？
+
+依上述问题，集成思想可以分为Boosting和Bagging。
+Boosting是一种串行集成，通过将弱学习器提升成为强学习器以提高预测精度。利用弱学习器间的关系，在一轮学习结束后，对之前训练中错误标记的样本赋上较高的权重，改变训练数据的概率分布（改变权值），然后再用算法学习得到一个分类器。针对不同训练数据集用算法学习出一系列分类器。典型算法是AdaBoost。
+
+
+每一轮如何改变训练数据的权值：AdaBoost中，提高前一轮被弱分类器分类错误的样本的权值，降低被正确分类的样本的权值 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/04/11/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/MD4Collison/" title="MD4Collison">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MD4Collison"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/04/11/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/MD4Collison/" title="MD4Collison">MD4Collison</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2019-04-11T03:41:20.000Z" title="Created 2019-04-11 11:41:20">2019-04-11</time></span></div><div class="content">MD4碰撞攻击
+
+
+
+
+​       目  的：以论文梳理为主，回顾总结课程学习。
+参考论文：2005年王小云教授等人发表的 Cryptanalysis of the Hash Functions MD4 and RIPEMD   
+
+MD4算法​         MD4是较早出现的hash函数，在MD4后出现 了MD5,HAVAL,RIPEMD，RIPEMD-160，SHA-1,SHA-256等更加复杂的hash函数，但设计原理和结构与MD4类似（碰撞原理也类似）。
+​         消息摘要函数MD4将任意长度的消息压缩至128bit。算法对一个消息做如下操作：
+
+step 1（填充）:将消息m填充至512的倍数（如果本身是512bit的消息，仍要填充，因为必须有64bit放消息长度）
+
+填充部分：|m  |   100…   |  len 
+对应长度：|  448bit          | 64bit
+
+step2（压缩）:填充完后，对每一个512bit消息块使用压缩函数将其压缩成128bit，最后一个消息块压缩完后得到的压缩值为整个消息的压缩值。
+压缩函数有3轮：
+
+
+N ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">VVWw</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/09/14/git%E5%90%8C%E6%97%B6%E5%90%8C%E6%AD%A5%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" title="git同时同步多个远程仓库"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git同时同步多个远程仓库"/></a><div class="content"><a class="title" href="/2021/09/14/git%E5%90%8C%E6%97%B6%E5%90%8C%E6%AD%A5%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" title="git同时同步多个远程仓库">git同时同步多个远程仓库</a><time datetime="2021-09-14T09:40:55.000Z" title="Created 2021-09-14 17:40:55">2021-09-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/18/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94%E2%80%94%E2%80%94CADE-Detecting-and-Explaining-Concept-Drift-Samples-for-Security-Applications/" title="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications"/></a><div class="content"><a class="title" href="/2020/11/18/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94%E2%80%94%E2%80%94CADE-Detecting-and-Explaining-Concept-Drift-Samples-for-Security-Applications/" title="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications">论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications</a><time datetime="2020-11-18T00:09:40.000Z" title="Created 2020-11-18 08:09:40">2020-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Assessing-and-Improving-Malware-Detection-Sustainability-through-App-Evolution-Studies/" title="论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies "><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies "/></a><div class="content"><a class="title" href="/2020/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Assessing-and-Improving-Malware-Detection-Sustainability-through-App-Evolution-Studies/" title="论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies ">论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies </a><time datetime="2020-11-10T08:04:47.000Z" title="Created 2020-11-10 16:04:47">2020-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/09/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/" title="关于接口文档"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于接口文档"/></a><div class="content"><a class="title" href="/2020/11/09/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/" title="关于接口文档">关于接口文档</a><time datetime="2020-11-09T07:22:31.000Z" title="Created 2020-11-09 15:22:31">2020-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/05/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Dos-and-Don-ts-of-Machine-Learning-In-Computer-Security/" title="论文阅读——Dos and Don'ts of Machine Learning In Computer Security"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文阅读——Dos and Don'ts of Machine Learning In Computer Security"/></a><div class="content"><a class="title" href="/2020/11/05/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Dos-and-Don-ts-of-Machine-Learning-In-Computer-Security/" title="论文阅读——Dos and Don'ts of Machine Learning In Computer Security">论文阅读——Dos and Don'ts of Machine Learning In Computer Security</a><time datetime="2020-11-05T11:26:44.000Z" title="Created 2020-11-05 19:26:44">2020-11-05</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/09/"><span class="card-archive-list-date">September 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/12/"><span class="card-archive-list-date">December 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/08/"><span class="card-archive-list-date">August 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/04/"><span class="card-archive-list-date">April 2019</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">8</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-12-15T11:34:36.024Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By VVWw</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
