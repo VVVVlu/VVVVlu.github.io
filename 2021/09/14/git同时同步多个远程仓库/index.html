@@ -149,7 +149,8 @@
     })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">只取壹瓢饮</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">git同时同步多个远程仓库</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-14T09:40:55.000Z" title="发表于 2021-09-14 17:40:55">2021-09-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-14T09:40:55.000Z" title="更新于 2021-09-14 17:40:55">2021-09-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="git同时同步多个远程仓库"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>git同时同步多个远程仓库</h1>
 
 <ul>
-<li><p></p><h3>需求</h3>拷贝github上的仓库到gtiblit，同时每次github仓库更新时，gitblit上同步更新。<p></p>
+<li><h3>需求</h3>拷贝github上的仓库到gtiblit，同时每次github仓库更新时，gitblit上同步更新。
+
 <span id="more"></span>
 </li>
 <li><h3>实现</h3>
@@ -159,18 +160,19 @@
 </li>
 <li><p>step2 : 对github的本地仓库的路径下，执行以下命令，在origin节点下补充gitblit上这个新的远程地址。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url --add origin gitblit-test.git地址</span><br></pre></td></tr></table></figure>
+
 <p>执行前远程地址情况：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote --verbose</span><br><span class="line">origin  github-test.git (fetch)</span><br><span class="line">origin  github-test.git (push)</span><br></pre></td></tr></table></figure>
+
 <p>执行后：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote --verbose</span><br><span class="line">origin  github-test.git (fetch)</span><br><span class="line">origin  github-test.git (push)</span><br><span class="line">origin  gitblit-test.git (push) #新添的gitblit仓库地址</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>step 3：运行git push，提交会同时在两个仓库上同步。</p>
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>step 3：运行git push，提交会同时在两个仓库上同步。</li>
-</ul>
-<ul>
 <li><h3>References</h3>
 
 <ul>

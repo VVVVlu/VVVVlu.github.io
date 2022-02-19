@@ -149,43 +149,43 @@
     })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">只取壹瓢饮</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-18T00:09:40.000Z" title="发表于 2020-11-18 08:09:40">2020-11-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-18T00:09:40.000Z" title="更新于 2020-11-18 08:09:40">2020-11-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><center><h3>论文阅读——CADE: Detecting and Explaining Concept Drift Samples for Security Applications</h3></center>
 
 <p>论文链接：<a target="_blank" rel="noopener" href="https://www.usenix.org/conference/usenixsecurity21/presentation/yang">https://www.usenix.org/conference/usenixsecurity21/presentation/yang</a></p>
-<h2><font color="#0f59a4">Motivation</font></h2>
+<h2><font color=#0f59a4>Motivation</font></h2>
 
 <p>在安全领域，当想要将基于机器学习的检测器（恶意软件检测、入侵检测等）部署到现实中使用时，效果可能不如测试阶段好。因为随着时间变化，benign和malicious行为都会发生一定变化，致使检测器出错。这个问题称为概念漂移（concept drift），本文中作者主要针对这个问题，提出一种能检测drifting sample并为drifting sample提供解释性的方法——<strong>CADE</strong>(Contrastive Autoencoder for Drifting detection and Explanation)。</p>
-<h2><font color="#0f59a4">Details</font></h2>
+<h2><font color=#0f59a4>Details</font></h2>
 
-<h4><font color="#f4a83a">Challenge——concept drift</font></h4>
+<h4><font color=#f4a83a>Challenge——concept drift</font></h4>
 
 <p>concept drift是发生在将检测模型部署到现实中使用后。因为训练数据是一个时间节点前的快照（静态），部署以后的模型所面临的正负样例数据的分布可能脱离训练集的分布，产生概念漂移。</p>
 <ul>
 <li>监督学习情况：部署到现实中后，真实测试数据分布偏离原始训练数据，导致模型决策边界发生漂移，检测出错。</li>
 <li>半监督学习异常检测情况：例如一些网络入侵检测系统在训练时使用标记为“正常”的流量进行训练，检测中遇到偏离正常的流量就标记为异常。但训练不可能包含所有正常情况，当发生concept drift时，新的正常行为变化就会引起误判。</li>
 </ul>
-<h4><font color="#f4a83a">Insights behind CADE</font></h4>
+<h4><font color=#f4a83a>Insights behind CADE</font></h4>
 
 <p><strong>target</strong>：<strong>检测</strong>来自新类的drifting samples并提供<strong>解释性</strong></p>
 <p><strong>challenge</strong>：针对高维数据，drifting samples分布在稀疏且巨大的异常值空间（sparse outlier space），难以有效获取良好的距离函数定义何种样本发生“drift”（将其与现有分布区别）。</p>
-<p><img src="/.com//reed/blog/source/_posts/论文阅读/img/CADE.png" alt="CADE"><strong>high-level idea</strong>：</p>
+<p><img src="/Users/reed/blog/source/_posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/img/CADE.png" alt="CADE"><strong>high-level idea</strong>：</p>
 <ul>
 <li><p>Detect Drifting：对即将输入检测器的数据，筛选出drifting samples。</p>
 </li>
 <li><p>Explain Drifting：选出一些具有语义的特征来解释对drifting samples的决策，为分析人员提供解释性，决定模型是否需要re-training。</p>
 </li>
 </ul>
-<h4><font color="#f4a83a">How to detect</font></h4>
+<h4><font color=#f4a83a>How to detect</font></h4>
 
 <ul>
 <li><p><strong>降维</strong></p>
-<p><img src="/.com//reed/Desktop/屏幕快照 2020-11-18 下午1.33.31.png" alt="屏幕快照 2020-11-18 下午1.33.31"></p>
+<p>![屏幕快照 2020-11-18 下午1.33.31](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-18 下午1.33.31.png)</p>
 <p>经过自编码器（autoencoder），将输入样本映射到低维空间，通过对比学习（contrastive learning）使得在低维空间中，同类样本距离更近，非同类样本距离更远。从而利用距离阈值识别drifting samples。</p>
 </li>
 <li><p><strong>损失函数解释</strong></p>
-<p><img src="/.com//reed/blog/source/_posts/论文阅读/img/CADE detection loss function.png" alt="CADE detection loss function"></p>
+<p>![CADE detection loss function](&#x2F;Users&#x2F;reed&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;论文阅读&#x2F;img&#x2F;CADE detection loss function.png)</p>
 <ul>
-<li>降维：reconstruction loss部分中，$x$是原始输入数据， <img src="/.com//reed/Desktop/屏幕快照 2020-11-23 下午3.05.09.png" alt="屏幕快照 2020-11-23 下午3.05.09">是$x$经过自编码器编码再解码后得到的重构数据。通过$x$和<img src="/.com//reed/Desktop/屏幕快照 2020-11-23 下午3.05.09.png" alt="屏幕快照 2020-11-23 下午3.05.09">的均方差来表示降维引入的loss。</li>
+<li>降维：reconstruction loss部分中，$x$是原始输入数据， ![屏幕快照 2020-11-23 下午3.05.09](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-23 下午3.05.09.png)是$x$经过自编码器编码再解码后得到的重构数据。通过$x$和![屏幕快照 2020-11-23 下午3.05.09](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-23 下午3.05.09.png)的均方差来表示降维引入的loss。</li>
 <li>同近异远：contrastive loss部分中，对于两个样本$x_i$和$x_j$， $yij$表征两个样本是否属于同类。$dij$表示两位样本降维后的欧氏距离，m是定义的常量，m理应大于绝大多数$dij$。<ul>
-<li>$yij=1$：两个样本不同类，$contrastiveLoss=$<img src="/.com//reed/Desktop/屏幕快照 2020-11-19 下午5.02.12.png" alt="屏幕快照 2020-11-19 下午5.02.12"></li>
-<li>$yij=0$：两个样本同类，$contrastiveLoss=$<img src="/.com//reed/Desktop/屏幕快照 2020-11-19 下午5.03.01.png" alt="屏幕快照 2020-11-19 下午5.03.01"></li>
+<li>$yij&#x3D;1$：两个样本不同类，$contrastiveLoss&#x3D;$![屏幕快照 2020-11-19 下午5.02.12](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-19 下午5.02.12.png)</li>
+<li>$yij&#x3D;0$：两个样本同类，$contrastiveLoss&#x3D;$![屏幕快照 2020-11-19 下午5.03.01](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-19 下午5.03.01.png)</li>
 </ul>
 </li>
 </ul>
@@ -195,32 +195,31 @@
 
 
 
-</li>
-</ul>
-<p>  <img src="/.com//reed/blog/source/_posts/论文阅读/img/CADE algorithm.png" alt="CADE algorithm"></p>
-<p>  <strong>Input</strong>:</p>
+<p>![CADE algorithm](&#x2F;Users&#x2F;reed&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;论文阅读&#x2F;img&#x2F;CADE algorithm.png)</p>
+<p><strong>Input</strong>:</p>
 <ul>
 <li>训练样本</li>
 <li>待测样本</li>
 <li>编码器f</li>
-<li><p>一个常量b</p>
+<li>一个常量b</li>
+</ul>
 <p><strong>output</strong>：</p>
-</li>
-<li><p>每个测试样本的drifting  score</p>
-</li>
+<ul>
+<li>每个测试样本的drifting  score</li>
 <li>测试样本最接近的类别</li>
 <li>各类的形心（centroid）</li>
-<li><p>各类的绝对中位差（MAD）</p>
+<li>各类的绝对中位差（MAD）</li>
+</ul>
 <p><strong>algorithm depiction</strong>：</p>
 <p>该算法利用自编码器将训练数据和测试数据映射到低维空间，使得各类样本距离“同进异远”。通过计算待测样本到各类别的形心距离关系，基于一个经验阈值判断待测样本是否为drifting sample。最后还输出形心与待测样本距离最近的类别作为待测样本的“训练分布中最接近类别”为之后提供可解释性。</p>
 <p><strong>使用MAD</strong>：</p>
 <p>对于同类样本，计算该类形心以及类中样本到形心距离，距离中位数为$d$，取各个距离减去中位数$d$得到的新数据的绝对值的中位数。因为不同类的样本距离紧凑程度表现不同，使用MAD解决这一问题。</p>
 </li>
 </ul>
-<h4><font color="#f4a83a">How to explain</font></h4>
+<h4><font color=#f4a83a>How to explain</font></h4>
 
 <p><strong>target</strong>:给一个drifting sample $x$和其在训练集中最接近类$y$，找出让$x$和$y$类样本区分开的的重要特征，为分析人员提供drifting sample的语义解释（<em>e.g.</em>, attacker mutation, organic behavior changes, previous unknown system bugs）。</p>
-<p><img src="/.com//reed/blog/source/_posts/论文阅读/img/CADE explanation.png" alt="CADE explanation"></p>
+<p>![CADE explanation](&#x2F;Users&#x2F;reed&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;论文阅读&#x2F;img&#x2F;CADE explanation.png)</p>
 <p><strong>Baseline Method：Boundary-based Explanation</strong></p>
 <p><strong>原理</strong></p>
 <p>​       将这个问题类比为“如何解释基于监督学习的分类器的分类结果”。将漂移检测器处理成二元分类器，分布同训练集的样本为class A，漂移样本属于class B。利用MLP(多层感知机)分类器训练区分分布内样本和漂移样本的分类器，从而找到decision boundary。</p>
@@ -233,14 +232,14 @@
 <p><strong>Their method：Distance-based explanation</strong></p>
 <p><strong>原理</strong></p>
 <ul>
-<li><p>特征扰动。​ 扰动方式：对drifting sample <img src="/.com//reed/Desktop/屏幕快照 2020-11-18 下午9.37.47.png" alt="屏幕快照 2020-11-18 下午9.37.47">,从它“最接近类”的所有样本中选取了距离形心最近的样本<img src="/.com//reed/Desktop/屏幕快照 2020-11-18 下午9.33.14.png" alt="屏幕快照 2020-11-18 下午9.33.14">,通过将drifting sample<img src="/.com//reed/Desktop/屏幕快照 2020-11-18 下午9.37.47.png" alt="屏幕快照 2020-11-18 下午9.37.47">中特征的值替换成<img src="/.com//reed/Desktop/屏幕快照 2020-11-18 下午9.33.14.png" alt="屏幕快照 2020-11-18 下午9.33.14">中对应特征的值来进行特征扰动。（先扰动，再降维）</p>
+<li><p>特征扰动。​ 扰动方式：对drifting sample ![屏幕快照 2020-11-18 下午9.37.47](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-18 下午9.37.47.png),从它“最接近类”的所有样本中选取了距离形心最近的样本![屏幕快照 2020-11-18 下午9.33.14](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-18 下午9.33.14.png),通过将drifting sample![屏幕快照 2020-11-18 下午9.37.47](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-18 下午9.37.47.png)中特征的值替换成![屏幕快照 2020-11-18 下午9.33.14](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-18 下午9.33.14.png)中对应特征的值来进行特征扰动。（先扰动，再降维）</p>
 </li>
 <li><p>看drifting sample和“最接近类”的形心距离变化。</p>
 </li>
 <li><p>获得特征掩码（feature mask）表明特征的重要性。$m$用来表示特征掩码向量。某一维等于1表示该维特征是关键特征，等于0表示该维特征的值不改变。由于m的每一维符合伯努利分布（0-1分布），问题就转变成了各维成为1的概率是多少。这个问题又可以通过最小化下面的式子解决：</p>
-<p><img src="/.com//reed/blog/source/_posts/论文阅读/img/CADE explanation feature mask.png" alt="CADE explanation feature mask"></p>
+<p>![CADE explanation feature mask](&#x2F;Users&#x2F;reed&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;论文阅读&#x2F;img&#x2F;CADE explanation feature mask.png)</p>
 <ul>
-<li><p>b是一个过滤器，如果<img src="/.com//reed/Desktop/屏幕快照 2020-11-18 下午9.37.47.png" alt="屏幕快照 2020-11-18 下午9.37.47">和<img src="/.com//reed/Desktop/屏幕快照 2020-11-18 下午9.33.14.png" alt="屏幕快照 2020-11-18 下午9.33.14">中某特征的取值相同，则$b_i=0$，对应地，直接不考虑这个特征。</p>
+<li><p>b是一个过滤器，如果![屏幕快照 2020-11-18 下午9.37.47](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-18 下午9.37.47.png)和![屏幕快照 2020-11-18 下午9.33.14](&#x2F;Users&#x2F;reed&#x2F;Desktop&#x2F;屏幕快照 2020-11-18 下午9.33.14.png)中某特征的取值相同，则$b_i&#x3D;0$，对应地，直接不考虑这个特征。</p>
 </li>
 <li><p>$Z_t$是经过特征扰动和降维后的向量。</p>
 </li>
