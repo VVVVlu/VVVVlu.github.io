@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>集成学习 | 只取壹瓢饮</title><meta name="author" content="c0mer"><meta name="copyright" content="c0mer"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="集成学习--简要梳理  前言 我们都知道，一个人的意见往往带有主观色彩，如果只听信一人之言，当这个人做出错误判断时，那会影响我们对整个事情的判断。为了对事物的认知更加全面正确，我们可以找多个可靠的人，让每个人都做判断，然后选择相信大多数人都认可的看法。这种用“多”代之“少”，减小偏差的思想便是集成学习。 集成学习 集成学习不是一种具体的机器学习算法，而是一种思想：将多个只在某些方面表现较好的弱分类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集成学习">
+<meta property="og:url" content="http://yoursite.com/2019/08/24/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="只取壹瓢饮">
+<meta property="og:description" content="集成学习--简要梳理  前言 我们都知道，一个人的意见往往带有主观色彩，如果只听信一人之言，当这个人做出错误判断时，那会影响我们对整个事情的判断。为了对事物的认知更加全面正确，我们可以找多个可靠的人，让每个人都做判断，然后选择相信大多数人都认可的看法。这种用“多”代之“少”，减小偏差的思想便是集成学习。 集成学习 集成学习不是一种具体的机器学习算法，而是一种思想：将多个只在某些方面表现较好的弱分类">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2019-08-24T11:11:54.000Z">
+<meta property="article:modified_time" content="2019-08-24T11:11:54.000Z">
+<meta property="article:author" content="c0mer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2019/08/24/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '集成学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2019-08-24 19:11:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">只取壹瓢饮</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">集成学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-08-24T11:11:54.000Z" title="发表于 2019-08-24 19:11:54">2019-08-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2019-08-24T11:11:54.000Z" title="更新于 2019-08-24 19:11:54">2019-08-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="集成学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><center><h3>集成学习--简要梳理</h3></center>
+
+<p><font color=#d85916>前言</font></p>
+<p>我们都知道，一个人的意见往往带有主观色彩，如果只听信一人之言，当这个人做出错误判断时，那会影响我们对整个事情的判断。为了对事物的认知更加全面正确，我们可以找多个可靠的人，让每个人都做判断，然后选择相信大多数人都认可的看法。这种用“多”代之“少”，减小偏差的思想便是集成学习。</p>
+<p><font color=#d85916>集成学习</font></p>
+<p>集成学习不是一种具体的机器学习算法，而是一种思想：将多个只在某些方面表现较好的弱分类器组合，通过一定的方式得到一个全方面表现较好的强分类器。</p>
+<p>两个问题：</p>
+<ul>
+<li>怎样得到多个弱分类器？</li>
+<li>怎样组合？</li>
+</ul>
+<p>依上述问题，集成思想可以分为Boosting和Bagging。</p>
+<p><b>Boosting</b>是一种<font color=red>串行</font>集成，通过将弱学习器<font color=red>提升</font>成为强学习器以提高预测精度。利用弱学习器间的关系，在一轮学习结束后，对之前训练中错误标记的样本赋上较高的权重，改变训练数据的概率分布（改变<font color=red>权值</font>），然后再用算法学习得到一个分类器。针对不同训练数据集用算法学习出一系列分类器。典型算法是AdaBoost。</p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/Boosting%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="Boosting示意图"></p>
+<ul>
+<li><p>每一轮如何改变训练数据的权值：AdaBoost中，提高前一轮被弱分类器分类错误的样本的权值，降低被正确分类的样本的权值。</p>
+</li>
+<li><p>如何将弱分类器组合成一个强分类器：AdaBoost中，采用<font color=red>加权多数表决</font>，加大分类误差率小的弱分类器的权值，减小分类误差率大的弱分类器的权值。</p>
+</li>
+</ul>
+<p>总而言之，信任度是不均分配的，分类器的重要程度不同，对可信度更高的分类器赋予更重的决定权。</p>
+<p><b>Bagging</b>（bootstrap aggregating 套袋）是一种<font color=red>并行</font>集成，将训练集<font color=red>有放回随机</font>抽取n个训练样本，共进行k次抽取，k个训练集相互独立，训练得到k个分类器（k个模型根据算法可能用于回归或分类，这里只讨论分类）。对于每次预测，每个分类器有自己预测结果，采用“一人一票”，“多数投票制”，将所有分类器的分类结果中最多数的情况作为整个强分类器的分类结果输出。</p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/Bagging%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="Bagging示意图"></p>
+<p>总而言之，分类器的重要程度相同，听大多数的意见。</p>
+<p><font color=#d85916>Bagging：装袋决策树</font></p>
+<p>装袋决策树 即 Bagging+决策树（Decision Tree）算法。用决策树算法会生成一棵决策树作为分类器，Bagging按照上述描述，从原数据集中得到多个训练数据集，并用其训练得到多棵决策树，然后投票票决。</p>
+<p>算法思想清晰，不如来考虑一下决策树的问题：决策树算法如何生成一棵决策树？</p>
+<blockquote>
+<ul>
+<li><p>决策树思想：贪心（最优分化）和分治（子树划分，分而治之）</p>
+</li>
+<li><p>决策树目的：随着划分过程的进行，使得决策树分支结点所包含的样本尽可能属于同一类别，让分类更加准确。</p>
+</li>
+<li><p>决策树学习通常包含三个方面：特征选择，决策树生成和剪枝。</p>
+</li>
+</ul>
+<p>决策树学习是监督学习，对训练数据集中的样本数据会用一些系列特征来描述，并附上分类标签（决策树也可用于回归问题，这里只讨论分类）</p>
+<p>分类可以有二值的⬇️</p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E5%9B%BE1.png" alt="决策树分类图1"></p>
+<p>也有多类的⬇️</p>
+<p><img src="https://mybucket1-1258582997.cos.ap-guangzhou.myqcloud.com/blog/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%80%E8%A6%81%E6%A2%B3%E7%90%86/%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E5%9B%BE2.png" alt="决策树分类图2"></p>
+<p><b>特征选择—</b>对每个非叶结点，如何确定选择哪个特征作为分类依据？当然是需要一定的标准来衡量了。ID3算法、C4.5算法和CART算法三种常用决策树生成算法采用不同的东西（对应的是信息增益、信息增益比、基尼指数）作为衡量。</p>
+<p>详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/you1314520me/article/details/45372201">https://blog.csdn.net/you1314520me/article/details/45372201</a></p>
+</blockquote>
+<p><font color=#d85916>Bagging：随机森林</font></p>
+<p>对于袋装决策树，每次选特征都是对所有特征进行考虑，可能会出现一个问题，每棵树构建时，很强的预测变量都可能会最先用于分裂结点，那么如此下去，多棵树会长得相似，具有相同偏好预测，这样的情况下投票，带来的预测结构并不比单棵树效果好，</p>
+<p>随机森林是装袋决策树一种改进。它也是自主抽样训练集建立一系列决策树，改进在于建树时，对每一个分裂节点的特征选择是从所有特征m个中随机选p个，然后分裂所用的特征只能从这p个中选。在每个分裂点处都重新进行抽样，选出p个预测变量，通常p≈√m。（当p&#x3D;m，即为袋装决策树）树的可信度变高。</p>
+<p><font color=#d85916>其它</font></p>
+<blockquote>
+<p>图片出处文章及参考博文：</p>
+<p>策树学习的特征选择 <a target="_blank" rel="noopener" href="https://blog.csdn.net/you1314520me/article/details/45372201">https://blog.csdn.net/you1314520me/article/details/45372201</a></p>
+<p>集成算法浅析：<a target="_blank" rel="noopener" href="https://www.infoq.cn/article/ensemble-method/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global">https://www.infoq.cn/article/ensemble-method/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global</a><br>机器学习-集成学习 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zongfa/p/9304353.html">https://www.cnblogs.com/zongfa/p/9304353.html</a><br>集成学习 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/66ad2ee1558b">https://www.jianshu.com/p/66ad2ee1558b</a><br>决策树（ID3 &amp; C4.5 &amp;CART） <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/38aa0daf6841">https://www.jianshu.com/p/38aa0daf6841</a><br>决策树系列（一）—基础知识回顾与总结  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/yonghao/p/5061873.html">https://www.cnblogs.com/yonghao/p/5061873.html</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">c0mer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/08/24/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/">http://yoursite.com/2019/08/24/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">只取壹瓢饮</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/12/26/Vue%E4%B8%AD%E4%BD%BF%E7%94%A8echarts%E7%94%9F%E6%88%90%E8%AF%8D%E4%BA%91/Vue%E4%B8%AD%E4%BD%BF%E7%94%A8echarts%E7%94%9F%E6%88%90%E8%AF%8D%E4%BA%91/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue中使用echarts生成词云</div></div></a></div><div class="next-post pull-right"><a href="/2019/04/11/MD4%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB/MD4Collison/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MD4Collison</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">c0mer</div><div class="author-info__description">学习记录</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">集成学习--简要梳理</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/02/19/Matplotlib%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE/" title="Matplotlib科学绘图">Matplotlib科学绘图</a><time datetime="2022-02-19T03:53:53.000Z" title="发表于 2022-02-19 11:53:53">2022-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/12/15/%E5%9C%A8git-%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8ssh-key-%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/" title="在git/远程服务器中使用ssh key 免密登录">在git/远程服务器中使用ssh key 免密登录</a><time datetime="2021-12-15T11:53:07.000Z" title="发表于 2021-12-15 19:53:07">2021-12-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/09/14/git%E5%90%8C%E6%97%B6%E5%90%8C%E6%AD%A5%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" title="git同时同步多个远程仓库">git同时同步多个远程仓库</a><time datetime="2021-09-14T09:40:55.000Z" title="发表于 2021-09-14 17:40:55">2021-09-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/18/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94%E2%80%94%E2%80%94CADE-Detecting-and-Explaining-Concept-Drift-Samples-for-Security-Applications/" title="论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications">论文阅读————CADE: Detecting and Explaining Concept Drift Samples for Security Applications</a><time datetime="2020-11-18T00:09:40.000Z" title="发表于 2020-11-18 08:09:40">2020-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/10/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E2%80%94%E2%80%94Assessing-and-Improving-Malware-Detection-Sustainability-through-App-Evolution-Studies/" title="论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies ">论文阅读——Assessing and Improving Malware Detection Sustainability through App Evolution Studies </a><time datetime="2020-11-10T08:04:47.000Z" title="发表于 2020-11-10 16:04:47">2020-11-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By c0mer</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
