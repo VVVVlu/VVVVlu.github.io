@@ -1,0 +1,656 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Android之ICC机制（三） | 只取壹瓢饮</title><meta name="author" content="c0mer"><meta name="copyright" content="c0mer"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言  从v2.8开始，FlowDroid集成ICCTA模块，只要提供指定格式的ICC信息(即ICC model)，FlowDroid可以在CallGraph(CG)中增加重定向边，弥补ICC的在CG中的不连续（如下）。本篇文章小结为了让FlowDroid实现ICC插桩，构造尽可能完整且有效的ICC model的过程。 1234eg. Activity1在onCreate()中调用startAct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android之ICC机制（三）">
+<meta property="og:url" content="http://yoursite.com/2022/03/10/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="只取壹瓢饮">
+<meta property="og:description" content="前言  从v2.8开始，FlowDroid集成ICCTA模块，只要提供指定格式的ICC信息(即ICC model)，FlowDroid可以在CallGraph(CG)中增加重定向边，弥补ICC的在CG中的不连续（如下）。本篇文章小结为了让FlowDroid实现ICC插桩，构造尽可能完整且有效的ICC model的过程。 1234eg. Activity1在onCreate()中调用startAct">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-03-10T02:37:52.000Z">
+<meta property="article:modified_time" content="2022-03-10T02:37:52.000Z">
+<meta property="article:author" content="c0mer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/test_cover.jpg"><link rel="canonical" href="http://yoursite.com/2022/03/10/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%89%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Android之ICC机制（三）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-10 10:37:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/modify.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/test_cover.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a></div></div></div><hr></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">只取壹瓢饮</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Android之ICC机制（三）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-10T02:37:52.000Z" title="发表于 2022-03-10 10:37:52">2022-03-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-10T02:37:52.000Z" title="更新于 2022-03-10 10:37:52">2022-03-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Android之ICC机制（三）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="top-img" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg');"></div><article class="post-content" id="article-container"><h1>前言</h1>
+
+<p>从v2.8开始，FlowDroid集成ICCTA模块，只要提供指定格式的ICC信息(即ICC model)，FlowDroid可以在CallGraph(CG)中增加重定向边，弥补ICC的在CG中的不连续（如下）。本篇文章小结为了让FlowDroid实现ICC插桩，构造尽可能完整且有效的ICC model的过程。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eg. Activity1在onCreate()中调用startActivity()，调起Activity2。</span><br><span class="line">ICCTA在CG中实现如下：</span><br><span class="line">Activity1#onCreate() -&gt; redirector1() -&gt; Activity2#dummyMain() -&gt; </span><br><span class="line">Activity2#onCreate（）</span><br></pre></td></tr></tbody></table></figure>
+
+<h1>获取完整有效的ICC model
+</h1>
+
+<h2>方案一：IC3中获取ICC model</h2>
+
+<p>FlowDroid中的ICCTA模块以IC3生成的ICC model作为输入样例。所以首先尝试的方法从IC3中获取ICC model。</p>
+<p>IC3生成ICC model过程如下：</p>
+<ul>
+<li>step1: 首先通过反编译工具dare获取apk的.class文件。</li>
+<li>step2: 以.class文件作为输入，调用IC3 jar包，配合指定参数生成ICC model。</li>
+</ul>
+<h3>问题及解决方案</h3>
+
+<h4>问题一：dare工具老旧，大多数应用反编译阶段就失败了，无法获取.class文件。
+</h4>
+
+<p><strong>使用别人修改过的IC3</strong></p>
+<p>github有别人修改过的jar包<a target="_blank" rel="noopener" href="https://github.com/JordanSamhi/Tools">modified-IC3.jar</a>，只要求输入apk不需要反编译，粗略逆向发现其在源码中也使用了Dex的文件修改库dexLib2对apk做解析，相当于集成了反编译这一步。然而运行modified-IC3.jar生成ICC model, 依旧有些和dare+IC3相同的错误没法生成ICC model。</p>
+<p><strong>dex2jar+IC3</strong></p>
+<p>另一个思路是，其他反编译工具替换dare生成.class文件,这里使用了<a target="_blank" rel="noopener" href="https://github.com/pxb1988/dex2jar">d2j-dex2jar</a>。将结果输入到IC3并运行IC3,可以生成ICC model,但得到的ICC model只包含来自AndroidManifest.xml的组件基本信息而不包含ICC 信息字段，或者包含ICC字段信息但输入到FlowDroid中也没有产生重定向边。</p>
+<h4>问题二:IC3生成的ICC model没有包含有用的ICC 字段信息(exit_points字段)
+
+<p><strong>Flowdroid导出反编译class + IC3</strong></p>
+<p>FlowDroid也在<a target="_blank" rel="noopener" href="https://github.com/secure-software-engineering/FlowDroid/tree/develop/soot-infoflow-android/ICCta_testdata_IC3_results">github</a>上提供了他们自己用IC3生成的ICC model。对于那些dex2jar+IC3的方法中出现有效ICC model输入到FlowDroid后无法产生重定向边的测试应用，可以在FlowDroid中找到对应的ICC mode，然后输入到FlowDroid中是可以产生重定向边的。比较两个出处的ICC model发现仅有exit_point字段的id值和statement值稍有差异。由于IC3官方文档的网站没有维护，所以对C3的使用和结果解读没有找到清晰的说明，这里通过IC3，ICCTA，FlowDroid等多处提及IC3的github仓库中issue寻找答案。在某个issue中提到“id”表示调用ICC 方法的指令位置，statement表示ICC方法（记录的应该是jimple语句)。在上述信息的反馈中，导致ICC model失效的原因可能是反编译工具不同导致差异,使得比如指令位置位移不同等问题。解决方法是先运行FlowDroid导出反编译结果，然后输入到IC3生成ICC model，最后再将ICC model输入到FlowDroid。</p>
+<p>最终可以获得ICC model，但IC3在真实应用上的表现很不好，不足以支撑分析需要。</p>
+</h4><h2>方案二：ICCBot结果转换为ICCmodel
+
+<p>IC3工具在应对真实应用时存在明显不足，故采取其他更有效提取ICC的工具，再将工具结果转换为与IC3格式相同的ICC model，这里采用<a target="_blank" rel="noopener" href="https://hanada31.github.io/pdf/icse22_iccbot.pdf">ICCBot</a>。</p>
+<p>这里分为两步：</p>
+<ul>
+<li>step1: 分析ICC model各字段含义</li>
+<li>step2: 从ICCBot中提取ICC结果，转换为与IC3格式相同的ICC model</li>
+</ul>
+</h2><h3>问题及解决方案</h3>
+
+<h4>问题一：ICC model 各字段含义
+</h4>
+
+<blockquote>
+<p><strong>name</strong>： 应用包名，manifest.package</p>
+<p><strong>version</strong>： 应用版本号，manifest.android:versionCode</p>
+<p><strong>used_permissions</strong>:  应用所申请的权限， uses-permission.android:name</p>
+<p><strong>components</strong>{  //组件信息，ICC包在其中</p>
+<p>​    <strong>name:</strong> 组件名</p>
+<p>​    <strong>kind:</strong> 组件类型， ACTIVITY等4大组件</p>
+<p>​    <strong>exported:</strong> true/false  当minSdkVersion或targetSdkVersion为16或者更低时他的默认值是true。如果是17和以上的版本默认值是false。</p>
+<p>​    <font color="red"><strong>extras</strong></font>{  //如果组件通过extra传递信息则存在该字段, 在调用getStringExtra的组件中出现。}</p>
+<p>​    <strong>Intent_filters</strong>{</p>
+<p>​        <strong>attributes</strong> {</p>
+<p>​        <strong>kind</strong>: <strong>ACTION</strong></p>
+<p>​        <strong>value</strong>:</p>
+<p>​        }</p>
+<p>​        <strong>attributes</strong> {</p>
+<p>​        <strong>kind</strong>: <strong>CATEGORY</strong></p>
+<p>​        <strong>value:</strong></p>
+<p>​        <strong>}</strong></p>
+<p>​    <strong>}</strong></p>
+<p>​    <font color="red"><strong>exit_points</strong></font>{ //如果有ICC,则存在该字段，显式Intent，隐式Intent不同 }</p>
+<p>}</p>
+<p><strong>analysis_start</strong>：开始分析时间戳</p>
+<p><strong>analysis_end</strong>：结束分析时间戳</p>
+</blockquote>
+<h3>举例</h3>
+
+<ul>
+<li><p><strong>extras字段</strong></p>
+<p>以Droid Bench/ActivityCommunICation3.apk为例，代码：</p>
+<p>![image (3)](image (3).png)</p>
+<p>ICC model：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">components {</span><br><span class="line">    name: <span class="string">"edu.mit.ICC_componentname_class_constant.InFlowActivity"</span></span><br><span class="line">     ...</span><br><span class="line">     ...</span><br><span class="line">    extras {</span><br><span class="line">        extra: <span class="string">"DroidBench"</span></span><br><span class="line">        instruction {</span><br><span class="line">          statement: <span class="string">"$r3 = virtualinvoke $r2.&lt;android.content.Intent: java.lang.String getStringExtra(java.lang.String)&gt;(\"DroidBench\")"</span></span><br><span class="line">          class_name: <span class="string">"edu.mit.ICC_componentname_class_constant.InFlowActivity"</span></span><br><span class="line">          method: <span class="string">"&lt;edu.mit.ICC_componentname_class_constant.InFlowActivity: void onCreate(android.os.Bundle)&gt;"</span></span><br><span class="line">          id: <span class="number">5</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//“class_name”类里的“method”方法中的“statement”语句调用了getStringExtra，该语句在类中的绝对位置为第5行（id），这个位置与反编译结果有关</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>显式Intent</strong></p>
+</li>
+</ul>
+<p>以Droid Bench/ActivityCommunICation3.apk为例，代码：</p>
+<p>![image (2)](image (2).png)</p>
+<p>ICC model:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">components {</span><br><span class="line">  name: <span class="string">"edu.mit.ICC_componentname_class_constant.OutFlowActivity"</span></span><br><span class="line">   ...</span><br><span class="line">   ...</span><br><span class="line">   ...</span><br><span class="line">    exit_points {</span><br><span class="line">    instruction {</span><br><span class="line">      statement: <span class="string">"virtualinvoke r0.&lt;edu.mit.ICC_componentname_class_constant.OutFlowActivity: void startActivity(android.content.Intent)&gt;($r8)"</span></span><br><span class="line">      class_name: <span class="string">"edu.mit.ICC_componentname_class_constant.OutFlowActivity"</span></span><br><span class="line">      method: <span class="string">"&lt;edu.mit.ICC_componentname_class_constant.OutFlowActivity: void onCreate(android.os.Bundle)&gt;"</span></span><br><span class="line">      id: <span class="number">16</span></span><br><span class="line">    }</span><br><span class="line">    kind: ACTIVITY</span><br><span class="line">    Intents {</span><br><span class="line">      attributes {</span><br><span class="line">        kind: EXTRA</span><br><span class="line">        value: <span class="string">"DroidBench"</span></span><br><span class="line">      }</span><br><span class="line">      attributes {</span><br><span class="line">        kind: CLASS</span><br><span class="line">        value: <span class="string">"edu/mit/ICC_componentname_class_constant/InFlowActivity"</span></span><br><span class="line">      }</span><br><span class="line">      attributes {</span><br><span class="line">        kind: PACKAGE</span><br><span class="line">        value: <span class="string">"edu.mit.ICC_componentname_class_constant"</span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"> }</span><br><span class="line">  </span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<ul>
+<li><strong>隐式Intent</strong></li>
+</ul>
+<p>以DroidBench/EventOrdering1.apk为例,代码：</p>
+<p>![image (4)](image (4).png)</p>
+<p>ICC model:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">components {</span><br><span class="line">  name: <span class="string">"edu.mit.ICC_event_ordering.OutFlowActivity"</span></span><br><span class="line">  exit_points {</span><br><span class="line">    instruction {</span><br><span class="line">      statement: <span class="string">"virtualinvoke r0.&lt;edu.mit.ICC_event_ordering.OutFlowActivity: void startActivity(android.content.Intent)&gt;($r2)"</span></span><br><span class="line">      class_name: <span class="string">"edu.mit.ICC_event_ordering.OutFlowActivity"</span></span><br><span class="line">      method: <span class="string">"&lt;edu.mit.ICC_event_ordering.OutFlowActivity: void onCreate(android.os.Bundle)&gt;"</span></span><br><span class="line">      id: <span class="number">6</span></span><br><span class="line">    }</span><br><span class="line">    kind: ACTIVITY</span><br><span class="line">    Intents {</span><br><span class="line">      attributes {</span><br><span class="line">        kind: ACTION</span><br><span class="line">        value: <span class="string">"edu.mit.ICC_event_ordering.ACTION"</span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h4>问题二：从ICCBot中提取ICC model</h4>
+
+<p>分析源码，分析FlowDroid对ICC model的实际使用过程，删减ICC model，仅保留必要字段的最小集合。提取ICCBot的生成的ICC信息，转变为缩减版ICC model输入到FlowDroid中。ICC model必要字段包括：</p>
+<ul>
+<li><strong>manifest中的所有组件name值</strong>：在ICCTA识别ICC的target component时，是直接在ICC model中，通过匹配conponent name，检查是否存在target component。所以ICC model必须包含注册过的所有组件。</li>
+<li><strong>exit_points中的所有字段</strong>：exit_points提供ICC的相关信息，包括发起<strong>组件的信息</strong>(package，class,ICC 方法的caller)，<strong>ICC 方法</strong>(如startActivity等)，<strong>目标组件的信息</strong>(从Intent中提取的信息，显式Intent提取组件名，隐式Intent提取action，catogory等Intent filter)。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">c0mer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2022/03/10/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%89%EF%BC%89/">http://yoursite.com/2022/03/10/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%89%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">只取壹瓢饮</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/03/03/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%BA%8C%EF%BC%89/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Android之ICC机制（二）</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/test_cover.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">c0mer</div><div class="author-info__description">学习记录</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VVVVlu"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">获取完整有效的ICC model
+</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">方案一：IC3中获取ICC model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">问题及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">问题一：dare工具老旧，大多数应用反编译阶段就失败了，无法获取.class文件。
+</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">问题二:IC3生成的ICC model没有包含有用的ICC 字段信息(exit_points字段)
+
+Flowdroid导出反编译class + IC3
+FlowDroid也在github上提供了他们自己用IC3生成的ICC model。对于那些dex2jar+IC3的方法中出现有效ICC model输入到FlowDroid后无法产生重定向边的测试应用，可以在FlowDroid中找到对应的ICC mode，然后输入到FlowDroid中是可以产生重定向边的。比较两个出处的ICC model发现仅有exit_point字段的id值和statement值稍有差异。由于IC3官方文档的网站没有维护，所以对C3的使用和结果解读没有找到清晰的说明，这里通过IC3，ICCTA，FlowDroid等多处提及IC3的github仓库中issue寻找答案。在某个issue中提到“id”表示调用ICC 方法的指令位置，statement表示ICC方法（记录的应该是jimple语句)。在上述信息的反馈中，导致ICC model失效的原因可能是反编译工具不同导致差异,使得比如指令位置位移不同等问题。解决方法是先运行FlowDroid导出反编译结果，然后输入到IC3生成ICC model，最后再将ICC model输入到FlowDroid。
+最终可以获得ICC model，但IC3在真实应用上的表现很不好，不足以支撑分析需要。
+方案二：ICCBot结果转换为ICCmodel
+
+IC3工具在应对真实应用时存在明显不足，故采取其他更有效提取ICC的工具，再将工具结果转换为与IC3格式相同的ICC model，这里采用ICCBot。
+这里分为两步：
+
+step1: 分析ICC model各字段含义
+step2: 从ICCBot中提取ICC结果，转换为与IC3格式相同的ICC model
+
+问题及解决方案
+
+问题一：ICC model 各字段含义
+
+
+
+name： 应用包名，manifest.package
+version： 应用版本号，manifest.android:versionCode
+used_permissions:  应用所申请的权限， uses-permission.android:name
+components{  //组件信息，ICC包在其中
+​    name: 组件名
+​    kind: 组件类型， ACTIVITY等4大组件
+​    exported: true/false  当minSdkVersion或targetSdkVersion为16或者更低时他的默认值是true。如果是17和以上的版本默认值是false。
+​    extras{  //如果组件通过extra传递信息则存在该字段, 在调用getStringExtra的组件中出现。}
+​    Intent_filters{
+​        attributes {
+​        kind: ACTION
+​        value:
+​        }
+​        attributes {
+​        kind: CATEGORY
+​        value:
+​        }
+​    }
+​    exit_points{ //如果有ICC,则存在该字段，显式Intent，隐式Intent不同 }
+}
+analysis_start：开始分析时间戳
+analysis_end：结束分析时间戳
+
+举例
+
+
+extras字段
+以Droid Bench/ActivityCommunICation3.apk为例，代码：
+![image (3)](image (3).png)
+ICC model：
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+components {
+    name: "edu.mit.ICC_componentname_class_constant.InFlowActivity"
+     ...
+     ...
+    extras {
+        extra: "DroidBench"
+        instruction {
+          statement: "$r3 = virtualinvoke $r2.&lt;android.content.Intent: java.lang.String getStringExtra(java.lang.String)&gt;(\"DroidBench\")"
+          class_name: "edu.mit.ICC_componentname_class_constant.InFlowActivity"
+          method: "&lt;edu.mit.ICC_componentname_class_constant.InFlowActivity: void onCreate(android.os.Bundle)&gt;"
+          id: 5
+    }
+  }
+}
+
+//“class_name”类里的“method”方法中的“statement”语句调用了getStringExtra，该语句在类中的绝对位置为第5行（id），这个位置与反编译结果有关
+
+
+显式Intent
+
+
+以Droid Bench/ActivityCommunICation3.apk为例，代码：
+![image (2)](image (2).png)
+ICC model:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+components {
+  name: "edu.mit.ICC_componentname_class_constant.OutFlowActivity"
+   ...
+   ...
+   ...
+    exit_points {
+    instruction {
+      statement: "virtualinvoke r0.&lt;edu.mit.ICC_componentname_class_constant.OutFlowActivity: void startActivity(android.content.Intent)&gt;($r8)"
+      class_name: "edu.mit.ICC_componentname_class_constant.OutFlowActivity"
+      method: "&lt;edu.mit.ICC_componentname_class_constant.OutFlowActivity: void onCreate(android.os.Bundle)&gt;"
+      id: 16
+    }
+    kind: ACTIVITY
+    Intents {
+      attributes {
+        kind: EXTRA
+        value: "DroidBench"
+      }
+      attributes {
+        kind: CLASS
+        value: "edu/mit/ICC_componentname_class_constant/InFlowActivity"
+      }
+      attributes {
+        kind: PACKAGE
+        value: "edu.mit.ICC_componentname_class_constant"
+      }
+    }
+  }
+ }
+  
+
+
+
+
+
+隐式Intent
+
+以DroidBench/EventOrdering1.apk为例,代码：
+![image (4)](image (4).png)
+ICC model:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+components {
+  name: "edu.mit.ICC_event_ordering.OutFlowActivity"
+  exit_points {
+    instruction {
+      statement: "virtualinvoke r0.&lt;edu.mit.ICC_event_ordering.OutFlowActivity: void startActivity(android.content.Intent)&gt;($r2)"
+      class_name: "edu.mit.ICC_event_ordering.OutFlowActivity"
+      method: "&lt;edu.mit.ICC_event_ordering.OutFlowActivity: void onCreate(android.os.Bundle)&gt;"
+      id: 6
+    }
+    kind: ACTIVITY
+    Intents {
+      attributes {
+        kind: ACTION
+        value: "edu.mit.ICC_event_ordering.ACTION"
+      }
+    }
+  }
+}
+
+
+问题二：从ICCBot中提取ICC model
+
+分析源码，分析FlowDroid对ICC model的实际使用过程，删减ICC model，仅保留必要字段的最小集合。提取ICCBot的生成的ICC信息，转变为缩减版ICC model输入到FlowDroid中。ICC model必要字段包括：
+
+manifest中的所有组件name值：在ICCTA识别ICC的target component时，是直接在ICC model中，通过匹配conponent name，检查是否存在target component。所以ICC model必须包含注册过的所有组件。
+exit_points中的所有字段：exit_points提供ICC的相关信息，包括发起组件的信息(package，class,ICC 方法的caller)，ICC 方法(如startActivity等)，目标组件的信息(从Intent中提取的信息，显式Intent提取组件名，隐式Intent提取action，catogory等Intent filter)。
+
+</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">方案二：ICCBot结果转换为ICCmodel
+
+IC3工具在应对真实应用时存在明显不足，故采取其他更有效提取ICC的工具，再将工具结果转换为与IC3格式相同的ICC model，这里采用ICCBot。
+这里分为两步：
+
+step1: 分析ICC model各字段含义
+step2: 从ICCBot中提取ICC结果，转换为与IC3格式相同的ICC model
+
+问题及解决方案
+
+问题一：ICC model 各字段含义
+
+
+
+name： 应用包名，manifest.package
+version： 应用版本号，manifest.android:versionCode
+used_permissions:  应用所申请的权限， uses-permission.android:name
+components{  //组件信息，ICC包在其中
+​    name: 组件名
+​    kind: 组件类型， ACTIVITY等4大组件
+​    exported: true/false  当minSdkVersion或targetSdkVersion为16或者更低时他的默认值是true。如果是17和以上的版本默认值是false。
+​    extras{  //如果组件通过extra传递信息则存在该字段, 在调用getStringExtra的组件中出现。}
+​    Intent_filters{
+​        attributes {
+​        kind: ACTION
+​        value:
+​        }
+​        attributes {
+​        kind: CATEGORY
+​        value:
+​        }
+​    }
+​    exit_points{ //如果有ICC,则存在该字段，显式Intent，隐式Intent不同 }
+}
+analysis_start：开始分析时间戳
+analysis_end：结束分析时间戳
+
+举例
+
+
+extras字段
+以Droid Bench/ActivityCommunICation3.apk为例，代码：
+![image (3)](image (3).png)
+ICC model：
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+components {
+    name: "edu.mit.ICC_componentname_class_constant.InFlowActivity"
+     ...
+     ...
+    extras {
+        extra: "DroidBench"
+        instruction {
+          statement: "$r3 = virtualinvoke $r2.&lt;android.content.Intent: java.lang.String getStringExtra(java.lang.String)&gt;(\"DroidBench\")"
+          class_name: "edu.mit.ICC_componentname_class_constant.InFlowActivity"
+          method: "&lt;edu.mit.ICC_componentname_class_constant.InFlowActivity: void onCreate(android.os.Bundle)&gt;"
+          id: 5
+    }
+  }
+}
+
+//“class_name”类里的“method”方法中的“statement”语句调用了getStringExtra，该语句在类中的绝对位置为第5行（id），这个位置与反编译结果有关
+
+
+显式Intent
+
+
+以Droid Bench/ActivityCommunICation3.apk为例，代码：
+![image (2)](image (2).png)
+ICC model:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+components {
+  name: "edu.mit.ICC_componentname_class_constant.OutFlowActivity"
+   ...
+   ...
+   ...
+    exit_points {
+    instruction {
+      statement: "virtualinvoke r0.&lt;edu.mit.ICC_componentname_class_constant.OutFlowActivity: void startActivity(android.content.Intent)&gt;($r8)"
+      class_name: "edu.mit.ICC_componentname_class_constant.OutFlowActivity"
+      method: "&lt;edu.mit.ICC_componentname_class_constant.OutFlowActivity: void onCreate(android.os.Bundle)&gt;"
+      id: 16
+    }
+    kind: ACTIVITY
+    Intents {
+      attributes {
+        kind: EXTRA
+        value: "DroidBench"
+      }
+      attributes {
+        kind: CLASS
+        value: "edu/mit/ICC_componentname_class_constant/InFlowActivity"
+      }
+      attributes {
+        kind: PACKAGE
+        value: "edu.mit.ICC_componentname_class_constant"
+      }
+    }
+  }
+ }
+  
+
+
+
+
+
+隐式Intent
+
+以DroidBench/EventOrdering1.apk为例,代码：
+![image (4)](image (4).png)
+ICC model:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+components {
+  name: "edu.mit.ICC_event_ordering.OutFlowActivity"
+  exit_points {
+    instruction {
+      statement: "virtualinvoke r0.&lt;edu.mit.ICC_event_ordering.OutFlowActivity: void startActivity(android.content.Intent)&gt;($r2)"
+      class_name: "edu.mit.ICC_event_ordering.OutFlowActivity"
+      method: "&lt;edu.mit.ICC_event_ordering.OutFlowActivity: void onCreate(android.os.Bundle)&gt;"
+      id: 6
+    }
+    kind: ACTIVITY
+    Intents {
+      attributes {
+        kind: ACTION
+        value: "edu.mit.ICC_event_ordering.ACTION"
+      }
+    }
+  }
+}
+
+
+问题二：从ICCBot中提取ICC model
+
+分析源码，分析FlowDroid对ICC model的实际使用过程，删减ICC model，仅保留必要字段的最小集合。提取ICCBot的生成的ICC信息，转变为缩减版ICC model输入到FlowDroid中。ICC model必要字段包括：
+
+manifest中的所有组件name值：在ICCTA识别ICC的target component时，是直接在ICC model中，通过匹配conponent name，检查是否存在target component。所以ICC model必须包含注册过的所有组件。
+exit_points中的所有字段：exit_points提供ICC的相关信息，包括发起组件的信息(package，class,ICC 方法的caller)，ICC 方法(如startActivity等)，目标组件的信息(从Intent中提取的信息，显式Intent提取组件名，隐式Intent提取action，catogory等Intent filter)。
+
+</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.1.</span> <span class="toc-text">问题及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">问题一：ICC model 各字段含义
+</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.2.</span> <span class="toc-text">举例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">问题二：从ICCBot中提取ICC model</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/03/10/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%89%EF%BC%89/" title="Android之ICC机制（三）">Android之ICC机制（三）</a><time datetime="2022-03-10T02:37:52.000Z" title="发表于 2022-03-10 10:37:52">2022-03-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/03/03/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Android之ICC机制（二）">Android之ICC机制（二）</a><time datetime="2022-03-03T11:14:29.000Z" title="发表于 2022-03-03 19:14:29">2022-03-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/02/24/Android%E4%B9%8BICC%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89/" title="Android之ICC机制（一）">Android之ICC机制（一）</a><time datetime="2022-02-24T11:21:48.000Z" title="发表于 2022-02-24 19:21:48">2022-02-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/02/19/Matplotlib%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE/" title="Matplotlib科学绘图">Matplotlib科学绘图</a><time datetime="2022-02-19T03:53:53.000Z" title="发表于 2022-02-19 11:53:53">2022-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/12/15/%E5%9C%A8git-%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8ssh-key-%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/" title="在git/远程服务器中使用ssh key 免密登录">在git/远程服务器中使用ssh key 免密登录</a><time datetime="2021-12-15T11:53:07.000Z" title="发表于 2021-12-15 19:53:07">2021-12-15</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">©2020 - 2022 By c0mer</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
