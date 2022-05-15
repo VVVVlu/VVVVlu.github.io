@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python 正则表达式用法 | 只取壹瓢饮</title><meta name="author" content="c0mer"><meta name="copyright" content="c0mer"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言正则表达式是特殊的字符串序列，可以实现模糊匹配一个字符串是否符合某种指定模式。 用法语法   模式 描述    ^ 匹配字符串的开头   $ 匹配字符串的末尾。   . 匹配任意字符，除了换行符   […] 匹配一组字符,或的关系，如[amk] 匹配 ‘a’，’m’或’k’   [^…] 匹配不在[]中的字符，非的关系，如[^abc] 匹配除了a,b,c之外的字符。   re* 匹配0个或多个">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python 正则表达式用法 | 只取壹瓢饮</title><meta name="author" content="c0mer"><meta name="copyright" content="c0mer"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言正则表达式是特殊的字符串序列，可以实现模糊匹配一个字符串是否符合某种指定模式。 用法语法精确字符匹配   模式 描述    ^ 匹配字符串的开头   $ 匹配字符串的末尾。   . 匹配任意字符，除了换行符   […] 匹配一组字符,或的关系，如[amk] 匹配 ‘a’，’m’或’k’   [^…] 匹配不在[]中的字符，非的关系，如[^abc] 匹配除了a,b,c之外的字符。   \w 匹配">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 正则表达式用法">
 <meta property="og:url" content="http://yoursite.com/2022/05/14/Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/index.html">
 <meta property="og:site_name" content="只取壹瓢饮">
-<meta property="og:description" content="前言正则表达式是特殊的字符串序列，可以实现模糊匹配一个字符串是否符合某种指定模式。 用法语法   模式 描述    ^ 匹配字符串的开头   $ 匹配字符串的末尾。   . 匹配任意字符，除了换行符   […] 匹配一组字符,或的关系，如[amk] 匹配 ‘a’，’m’或’k’   [^…] 匹配不在[]中的字符，非的关系，如[^abc] 匹配除了a,b,c之外的字符。   re* 匹配0个或多个">
+<meta property="og:description" content="前言正则表达式是特殊的字符串序列，可以实现模糊匹配一个字符串是否符合某种指定模式。 用法语法精确字符匹配   模式 描述    ^ 匹配字符串的开头   $ 匹配字符串的末尾。   . 匹配任意字符，除了换行符   […] 匹配一组字符,或的关系，如[amk] 匹配 ‘a’，’m’或’k’   [^…] 匹配不在[]中的字符，非的关系，如[^abc] 匹配除了a,b,c之外的字符。   \w 匹配">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
 <meta property="article:published_time" content="2022-05-14T01:45:56.000Z">
@@ -147,7 +147,7 @@
     }
     detectApple()
     })(window)</script><link rel="stylesheet" href="/css/modify.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/test_cover.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div></div><hr></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">只取壹瓢饮</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python 正则表达式用法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-14T01:45:56.000Z" title="发表于 2022-05-14 09:45:56">2022-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-14T01:45:56.000Z" title="更新于 2022-05-14 09:45:56">2022-05-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python 正则表达式用法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="top-img" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg');"></div><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>正则表达式是特殊的字符串序列，可以实现模糊匹配一个字符串是否符合某种指定模式。</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><table>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="精确字符匹配"><a href="#精确字符匹配" class="headerlink" title="精确字符匹配"></a>精确字符匹配</h4><table>
 <thead>
 <tr>
 <th align="left">模式</th>
@@ -173,74 +173,6 @@
 <tr>
 <td align="left">[^…]</td>
 <td align="left">匹配不在[]中的字符，非的关系，如[^abc] 匹配除了a,b,c之外的字符。</td>
-</tr>
-<tr>
-<td align="left">re*</td>
-<td align="left">匹配0个或多个的表达式。</td>
-</tr>
-<tr>
-<td align="left">re+</td>
-<td align="left">匹配1个或多个的表达式。</td>
-</tr>
-<tr>
-<td align="left">re?</td>
-<td align="left">匹配0个或1个由前面的正则表达式定义的片段，非贪婪方式</td>
-</tr>
-<tr>
-<td align="left">re{ n}</td>
-<td align="left">精确匹配 n 个前面表达式。例如， <strong>o{2}</strong> 不能匹配 “Bob” 中的 “o”，但是能匹配 “food” 中的两个 o。</td>
-</tr>
-<tr>
-<td align="left">re{ n,}</td>
-<td align="left">匹配 n 个前面表达式。例如， o{2,} 不能匹配”Bob”中的”o”，但能匹配 “foooood”中的所有 o。”o{1,}” 等价于 “o+”。”o{0,}” 则等价于 “o*“。</td>
-</tr>
-<tr>
-<td align="left">re{ n, m}</td>
-<td align="left">匹配 n 到 m 次由前面的正则表达式定义的片段，贪婪方式</td>
-</tr>
-<tr>
-<td align="left">a| b</td>
-<td align="left">匹配a或b</td>
-</tr>
-<tr>
-<td align="left">(re)</td>
-<td align="left">对正则表达式分组并记住匹配的文本</td>
-</tr>
-<tr>
-<td align="left">(?imx)</td>
-<td align="left">正则表达式包含三种可选标志：i, m, 或 x 。只影响括号中的区域。</td>
-</tr>
-<tr>
-<td align="left">(?-imx)</td>
-<td align="left">正则表达式关闭 i, m, 或 x 可选标志。只影响括号中的区域。</td>
-</tr>
-<tr>
-<td align="left">(?: re)</td>
-<td align="left">类似 (…), 但是不表示一个组</td>
-</tr>
-<tr>
-<td align="left">(?imx: re)</td>
-<td align="left">在括号中使用i, m, 或 x 可选标志</td>
-</tr>
-<tr>
-<td align="left">(?-imx: re)</td>
-<td align="left">在括号中不使用i, m, 或 x 可选标志</td>
-</tr>
-<tr>
-<td align="left">(?#…)</td>
-<td align="left">注释.</td>
-</tr>
-<tr>
-<td align="left">(?= re)</td>
-<td align="left">前向肯定界定符。如果所含正则表达式，以 … 表示，在当前位置成功匹配时成功，否则失败。但一旦所含表达式已经尝试，匹配引擎根本没有提高；模式的剩余部分还要尝试界定符的右边。</td>
-</tr>
-<tr>
-<td align="left">(?! re)</td>
-<td align="left">前向否定界定符。与肯定界定符相反；当所含表达式不能在字符串当前位置匹配时成功</td>
-</tr>
-<tr>
-<td align="left">(?&gt; re)</td>
-<td align="left">匹配的独立模式，省去回溯。</td>
 </tr>
 <tr>
 <td align="left">\w</td>
@@ -294,15 +226,29 @@
 <td align="left">\n, \t, 等.</td>
 <td align="left">匹配一个换行符。匹配一个制表符。等</td>
 </tr>
-<tr>
-<td align="left">\1…\9</td>
-<td align="left">匹配第n个分组的内容。</td>
-</tr>
-<tr>
-<td align="left">\10</td>
-<td align="left">匹配第n个分组的内容，如果它经匹配。否则指的是八进制字符码的表达式。</td>
-</tr>
 </tbody></table>
+<h4 id="变长字符匹配"><a href="#变长字符匹配" class="headerlink" title="变长字符匹配"></a>变长字符匹配</h4><ul>
+<li>用<code>*</code>表示任意个字符（包括0个）,（如：<code>\s*</code>表示匹配任意多个空白字符，以下以此类推）</li>
+<li>用<code>+</code>表示至少一个字符</li>
+<li>用<code>?</code>表示0个或1个字符</li>
+<li>用<code>{n}</code>表示n个字符</li>
+<li>用<code>{n,m}</code>表示n-m个字符</li>
+</ul>
+<h4 id="界定符"><a href="#界定符" class="headerlink" title="界定符"></a>界定符</h4><p>举例： s =”Labcdef;”</p>
+<ul>
+<li>不包含匹配的开头和结尾：(?&lt;=L).*?(?=;)    【结果：abcdef】</li>
+<li>不包含开头，包含结尾：(?&lt;=L).*?(?&lt;=;)   【结果：abcdef;】</li>
+<li>包含开头，不包含结尾：’(?=L).*?(?=;)  【结果：Labcdef】</li>
+</ul>
+<h4 id="非惰性匹配"><a href="#非惰性匹配" class="headerlink" title="非惰性匹配"></a>非惰性匹配</h4><ul>
+<li>正则表达式默认是惰性匹配（或叫贪婪匹配），即匹配尽可能长的字符串</li>
+<li>非惰性匹配：+或*后跟？即表示非惰性匹配，匹配尽可能短的字符串</li>
+<li>注意：一个?只保证所跟的+或*所在字符是非惰性匹配，举例如下：</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">"Lab&gt;c;d&gt;;"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re_key = re.<span class="built_in">compile</span>(<span class="string">r'L.*&gt;.*?;'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re_key.findall(s)</span><br><span class="line">[<span class="string">'Lab&gt;c;d&gt;;'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re_key_1 = re.<span class="built_in">compile</span>(<span class="string">r'L.*?&gt;.*?;'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re_key_1.findall(s)</span><br><span class="line">[<span class="string">'Lab&gt;c;'</span>]</span><br></pre></td></tr></tbody></table></figure>
+
+
+
 <h3 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h3><ul>
 <li><p><strong>匹配字符串</strong>：</p>
 <ul>
@@ -340,12 +286,11 @@
 </ul>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'a b   c'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分隔所有字符</span></span><br><span class="line"><span class="built_in">print</span>(s.split(<span class="string">' '</span>))  <span class="comment"># ['a', 'b', '', '', 'c']</span></span><br><span class="line">re.split(<span class="string">r'\s+'</span>, s)  <span class="comment"># ['a', 'b', 'c']</span></span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
-<h3 id="贪婪匹配与惰性匹配"><a href="#贪婪匹配与惰性匹配" class="headerlink" title="贪婪匹配与惰性匹配"></a>贪婪匹配与惰性匹配</h3><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul>
-<li>可以对象中的内容拼接成字符串，采用正则匹配快速获得需要的结果。例子如下：</li>
-<li>快速定位指定文本开头的位置，例子如下：</li>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul>
+<li>可以将搜索范围拼接成一个字符串整体，采用正则匹配快速获得需要的结果。</li>
 </ul>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-reg-expressions.html">菜鸟教程-Python 正则表达式</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017639890281664">廖雪峰网站-Python 正则表达式</a></li>
 </ul>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">c0mer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2022/05/14/Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/">http://yoursite.com/2022/05/14/Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">只取壹瓢饮</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/14/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">深拷贝和浅拷贝</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/test_cover.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">c0mer</div><div class="author-info__description">学习记录</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VVVVlu"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">常见用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%83%B0%E6%80%A7%E5%8C%B9%E9%85%8D"><span class="toc-number">2.3.</span> <span class="toc-text">贪婪匹配与惰性匹配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-number">3.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/14/Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/" title="Python 正则表达式用法">Python 正则表达式用法</a><time datetime="2022-05-14T01:45:56.000Z" title="发表于 2022-05-14 09:45:56">2022-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/14/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝和浅拷贝">深拷贝和浅拷贝</a><time datetime="2022-05-14T01:45:04.000Z" title="发表于 2022-05-14 09:45:04">2022-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/14/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令">git常用命令</a><time datetime="2022-05-14T01:44:17.000Z" title="发表于 2022-05-14 09:44:17">2022-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/Android-Handler-%E5%BC%82%E6%AD%A5%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" title="Android Handler 异步消息处理机制">Android Handler 异步消息处理机制</a><time datetime="2022-04-23T12:15:09.000Z" title="发表于 2022-04-23 20:15:09">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/15/Java-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Java Lambda表达式">Java Lambda表达式</a><time datetime="2022-04-15T15:02:35.000Z" title="发表于 2022-04-15 23:02:35">2022-04-15</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">©2020 - 2022 By c0mer</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">c0mer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2022/05/14/Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/">http://yoursite.com/2022/05/14/Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">只取壹瓢饮</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/14/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">深拷贝和浅拷贝</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/test_cover.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">c0mer</div><div class="author-info__description">学习记录</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VVVVlu"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%BE%E7%A1%AE%E5%AD%97%E7%AC%A6%E5%8C%B9%E9%85%8D"><span class="toc-number">2.1.1.</span> <span class="toc-text">精确字符匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%95%BF%E5%AD%97%E7%AC%A6%E5%8C%B9%E9%85%8D"><span class="toc-number">2.1.2.</span> <span class="toc-text">变长字符匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%95%8C%E5%AE%9A%E7%AC%A6"><span class="toc-number">2.1.3.</span> <span class="toc-text">界定符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%83%B0%E6%80%A7%E5%8C%B9%E9%85%8D"><span class="toc-number">2.1.4.</span> <span class="toc-text">非惰性匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">常见用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-number">3.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/14/Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/" title="Python 正则表达式用法">Python 正则表达式用法</a><time datetime="2022-05-14T01:45:56.000Z" title="发表于 2022-05-14 09:45:56">2022-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/14/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝和浅拷贝">深拷贝和浅拷贝</a><time datetime="2022-05-14T01:45:04.000Z" title="发表于 2022-05-14 09:45:04">2022-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/14/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令">git常用命令</a><time datetime="2022-05-14T01:44:17.000Z" title="发表于 2022-05-14 09:44:17">2022-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/Android-Handler-%E5%BC%82%E6%AD%A5%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" title="Android Handler 异步消息处理机制">Android Handler 异步消息处理机制</a><time datetime="2022-04-23T12:15:09.000Z" title="发表于 2022-04-23 20:15:09">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/15/Java-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Java Lambda表达式">Java Lambda表达式</a><time datetime="2022-04-15T15:02:35.000Z" title="发表于 2022-04-15 23:02:35">2022-04-15</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">©2020 - 2022 By c0mer</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
