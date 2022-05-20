@@ -147,7 +147,7 @@
     }
     detectApple()
     })(window)</script><link rel="stylesheet" href="/css/modify.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/test_cover.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div></div><hr></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">只取壹瓢饮</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python 深拷贝和浅拷贝</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-20T08:47:17.000Z" title="发表于 2022-05-20 16:47:17">2022-05-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-20T08:47:17.000Z" title="更新于 2022-05-20 16:47:17">2022-05-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python 深拷贝和浅拷贝"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="top-img" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg');"></div><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在写某个脚本时，用了DFS(深度有限遍历)算法判断两个点的可达性，并传入参数trace记录路径，如下因为直接采用赋值形式，导致函数逻辑错误（cur_trace改变的时候，trace也改变了），这才了解到在Python中存在赋值、浅拷贝和深拷贝的区别。</p>
-<p><img src="/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520184026023.png" alt="image-20220520184026023"></p>
+<p><img src="/2022/05/20/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520184026023.png" alt="image-20220520184026023"></p>
 <h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p>在了解赋值、深浅拷贝之前，先来了解以下概念：</p>
 <ul>
 <li><p><strong>对象</strong>：</p>
@@ -157,14 +157,14 @@
 </ul>
 </li>
 <li><p><strong>引用</strong>：在python中，新建一个变量都是在为某个对象新增一个引用，引用本身不占有内存空间，只是对对象的一个指向（别名）。如下图，在a=2中，2是一个对象，a是对2这个对象的一个引用。</p>
-<p><img src="/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520190913544.png" alt="image-20220520190913544"></p>
+<p><img src="/2022/05/20/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520190913544.png" alt="image-20220520190913544"></p>
 </li>
 </ul>
 <h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><ul>
 <li><p><strong>方法</strong>：“=”</p>
 </li>
 <li><p><strong>特点</strong>：赋值就是对对象的引用，不开辟新的内存空间。如下，b=a只是对a所指的对象增加一个引用b，a和b指向同一个对象。</p>
-<p><img src="/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520212043032.png" alt="image-20220520212043032"></p>
+<p><img src="/2022/05/20/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520212043032.png" alt="image-20220520212043032"></p>
 </li>
 <li><p><strong>当改变b时</strong>：a也会改变。</p>
 </li>
@@ -179,7 +179,7 @@
 </ul>
 </li>
 <li><p><strong>特点</strong>：开辟新内存空间，拷贝父对象，但不拷贝对象内部的子对象，子对象仍然是引用。如下，b=a.copy()后b只拷贝了a的第一层，元素是对象就拷贝了对象，元素是引用就拷贝了引用。</p>
-<p><img src="/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520213151055.png" alt="image-20220520213151055"></p>
+<p><img src="/2022/05/20/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520213151055.png" alt="image-20220520213151055"></p>
 </li>
 <li><p><strong>当b改变时</strong>：</p>
 <ul>
@@ -198,7 +198,7 @@
 <li><p><strong>方法</strong>：用copy模块中的deepcopy()函数，b = copy.deepcopy(a)</p>
 </li>
 <li><p><strong>特点</strong>：开辟新内存空间，递归拷贝对象<strong>全部内容</strong>，包括父对象及其子对象。</p>
-<p><img src="/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520214631675.png" alt="image-20220520214631675"></p>
+<p><img src="/2022/05/20/Python-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/image-20220520214631675.png" alt="image-20220520214631675"></p>
 </li>
 <li><p><strong>当b改变时</strong>：改变b中父对象或子对象均不影响a，二者完全独立。</p>
 </li>

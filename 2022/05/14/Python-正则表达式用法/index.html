@@ -227,14 +227,16 @@
 <td align="left">匹配一个换行符。匹配一个制表符。等</td>
 </tr>
 </tbody></table>
-<h4 id="变长字符匹配"><a href="#变长字符匹配" class="headerlink" title="变长字符匹配"></a>变长字符匹配</h4><ul>
+<h4 id="变长字符匹配"><a href="#变长字符匹配" class="headerlink" title="变长字符匹配"></a>变长字符匹配</h4><p>将上方精确字符模式与以下模式字符<strong>组合</strong>，可以匹配变长字符</p>
+<ul>
 <li>用<code>*</code>表示任意个字符（包括0个）,（如：<code>\s*</code>表示匹配任意多个空白字符，以下以此类推）</li>
 <li>用<code>+</code>表示至少一个字符</li>
 <li>用<code>?</code>表示0个或1个字符</li>
 <li>用<code>{n}</code>表示n个字符</li>
 <li>用<code>{n,m}</code>表示n-m个字符</li>
 </ul>
-<h4 id="界定符"><a href="#界定符" class="headerlink" title="界定符"></a>界定符</h4><p>举例： s =”Labcdef;”</p>
+<h4 id="界定符"><a href="#界定符" class="headerlink" title="界定符"></a>界定符</h4><p>当需要以某些开头/结尾特征作为模式来匹配，而匹配结果中又需要/不需要保留开头/结尾时，采用定界符。</p>
+<p>举例： s =”Labcdef;”</p>
 <ul>
 <li>不包含匹配的开头和结尾：(?&lt;=L).*?(?=;)    【结果：abcdef】</li>
 <li>不包含开头，包含结尾：(?&lt;=L).*?(?&lt;=;)   【结果：abcdef;】</li>
