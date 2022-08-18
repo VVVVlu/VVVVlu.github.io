@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>git常用命令 | 只取壹瓢饮</title><meta name="author" content="c0mer"><meta name="copyright" content="c0mer"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="常用命令 clone远程仓库到本地：在准备放仓库的路径下，git clone +仓库地址   更新本地仓库：git pull   查看仓库提交状态：git status  放弃所有更改：git checkout .  分支管理 切换分支：git checkout 分支名  新建本地分支并切换：git checkout -b 分支名  提交本地分支到远程，创建/更新同名远程分支：git p">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>git常用命令 | 只取壹瓢饮</title><meta name="author" content="c0mer"><meta name="copyright" content="c0mer"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="常用命令 clone远程仓库到本地：在准备放仓库的路径下，git clone +仓库地址   更新本地仓库：git pull   查看仓库提交状态：git status  放弃所有更改：git checkout .  修改commit的注释：git commit –amend，进入vim编辑后保存 分支管理 切换分支：git checkout 分支名  新建本地分支并切换：git checkout">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git常用命令">
 <meta property="og:url" content="http://yoursite.com/2022/05/14/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="只取壹瓢饮">
-<meta property="og:description" content="常用命令 clone远程仓库到本地：在准备放仓库的路径下，git clone +仓库地址   更新本地仓库：git pull   查看仓库提交状态：git status  放弃所有更改：git checkout .  分支管理 切换分支：git checkout 分支名  新建本地分支并切换：git checkout -b 分支名  提交本地分支到远程，创建/更新同名远程分支：git p">
+<meta property="og:description" content="常用命令 clone远程仓库到本地：在准备放仓库的路径下，git clone +仓库地址   更新本地仓库：git pull   查看仓库提交状态：git status  放弃所有更改：git checkout .  修改commit的注释：git commit –amend，进入vim编辑后保存 分支管理 切换分支：git checkout 分支名  新建本地分支并切换：git checkout">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
 <meta property="article:published_time" content="2022-05-14T01:44:17.000Z">
@@ -151,6 +151,7 @@
 <li>更新本地仓库：git pull  </li>
 <li>查看仓库提交状态：git status </li>
 <li>放弃所有更改：git checkout . </li>
+<li>修改commit的注释：git commit –amend，进入vim编辑后保存</li>
 <li>分支管理<ul>
 <li>切换分支：git checkout 分支名 </li>
 <li>新建本地分支并切换：git checkout -b 分支名 </li>
@@ -199,7 +200,7 @@
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> git rebase -i a0ecfc</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>3.保存文档</p>
-<p>4.强制推到远程仓库</p>
+<p>4.强制推到远程仓库（本地和远程的提交数据会被清除，谨慎操作，注意备份！）</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> git push origin -f</span> </span><br></pre></td></tr></tbody></table></figure>
 
 
@@ -208,6 +209,14 @@
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> git <span class="built_in">log</span> --pretty-log=oneline</span></span><br><span class="line"></span><br><span class="line">假设返回结果：</span><br><span class="line">a9654a671de15581545d06e22f397c2bf076c059 (HEAD -&gt; main, origin/main) 更新readme格式</span><br><span class="line">		77c2612cc86d86b566a6416b89f3046e8e41f869 更新readme格式</span><br><span class="line">		5bc315cee3657f13c58c596614b524dbfbb1148e 修改readme格式</span><br></pre></td></tr></tbody></table></figure>
 
 <p>2.如果想要从“更新readme”撤回到“修改readme”，使用git reset</p>
+<ul>
+<li>三种模式根据需要使用：<ul>
+<li>–soft：本地代码无变化，”更新readme格式”的commit被放在暂存区，相当于已经执行了git add .</li>
+<li>–mixed：本地代码无变化，”更新readme格式”的commit修改没被放在暂存区，如果提交，需要先执行git add .</li>
+<li>–hard：本地代码变化，强制回滚到指定版本内容，且无法找回</li>
+</ul>
+</li>
+</ul>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> git reset --soft 5bc315cee3657f13c58c596614b524dbfbb1148e</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>3.查看当前commit，发现“更新格式”commit已经被撤回</p>
